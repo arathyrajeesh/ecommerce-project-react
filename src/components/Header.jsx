@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/header.css';
+import { Link } from 'react-router-dom';
+
 
 function Header() {
     const bannerMessages = [
         "15% OFF ALL TENTS",
-        "FREE SHIPPING ON ORDERS OVER $100",
-        "NEW SUMMER COLLECTION IS LIVE!",
-        "JOIN OUR NEWSLETTER FOR 10% OFF"
+        "WE SHIP WORLDWIDE",
     ];
 
     const [currentBannerText, setCurrentBannerText] = useState(bannerMessages[0]);
@@ -29,17 +29,18 @@ function Header() {
         </div>
         <header className="main-header">
             <div className="header-left">
-            <a href="#" className="logo"> MADAGASCAR</a>
+                <a href="#" className="logo"> MADAGASCAR</a>
             </div>
             <nav className="header-nav">
-            <a href="#">HOME</a>
-            <a href="#">SHOP</a>
-            <a href="#">BLOG</a>
-            <a href="#">ABOUT</a>
-            <a href="#">CONTACT</a>
+                    <li><Link to={'/'}>HOME</Link></li>
+                    <li><Link to={'/shop'}>SHOP</Link></li>
+                    <li><Link to={'/blog'}>BLOG</Link></li>
+                    <li><Link to={'/about'}>ABOUT</Link></li>
+                    <li><Link to={'/contact'}>CONTACT</Link></li>
+                    <li><Link to={'/login'}>Login</Link></li>
             </nav>
             <div className="header-right">
-            <a href="#" className="cart-icon"></a>
+                <a href="#" className="cart-icon"></a>
             </div>
         </header>
         </>

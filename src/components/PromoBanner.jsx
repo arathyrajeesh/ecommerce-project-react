@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/promobanner.css';
 
+
 function PromoBanners() {
     return (
         <section className="promo-banners">
@@ -13,7 +14,7 @@ function PromoBanners() {
             {/* <p>Special Tent Sale - 15% OFF All Tents</p> */}
         </div>
         <div className="promo-item third">
-            <h3>START PLANNING <br /> YOUR NEXT ADVENTURE</h3>
+            <h3>START PLANNING <br /> YOUR NEXT <br/> ADVENTURE</h3>
         </div>
         </section>
     );

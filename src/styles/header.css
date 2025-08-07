@@ -1,17 +1,17 @@
 .top-banner {
     background-color: #f7f7f7;
-    color: #a0a0a0;
+    color:rgb(226, 58, 58);
     text-align: center;
     padding: 8px 0;
-    font-size: 12px;
+    font-size: 20px;
     letter-spacing: 1px;
 }
 .main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 50px;
-    background-color: #fff;
+    padding: 30px 50px;
+    background-color:white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 .logo {
@@ -25,19 +25,16 @@
 }
 .header-nav {
     display: flex;
-    gap: 30px;
+    gap: 70px;
+    list-style-type: none;
 }
 .header-nav a {
     text-decoration: none;
     color: #333;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 16px;
     transition: color 0.3s;
 }
 .header-nav a:hover {
     color: #e53935;
-}
-.cart-icon {
-    font-size: 20px;
-    color: #333;
 }

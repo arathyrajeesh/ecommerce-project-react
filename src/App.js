@@ -1,16 +1,31 @@
 import React from 'react';
 import Header from '../src/components/Header'
-import Hero from '../src/components/Hero';
 import './App.css'; 
-import PromoBanners from './components/PromoBanner';
+import { BrowserRouter, Route, Routes }  from 'react-router-dom'
+import Shop from './pages/Shop';
+import Blog from './pages/Blog';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Login from './components/Login';
+import Homepage from './pages/Homepage';
+import Footer from './components/Footer';
+
 
 function App() {
   return (
-    <div className="app-container">
-      <Header />
-      <Hero />
-      <PromoBanners/>
-    </div>
+    <BrowserRouter>
+        <Header/>
+        <Routes>
+            <Route path='/'element={<Homepage/>}/>
+            <Route path='/shop' element={<Shop/>}/>
+            <Route path='/blog' element={<Blog/>}/>
+            <Route path='/about' element={<About/>}/>
+            <Route path='/contact' element={<Contact/>}/>
+            <Route path='/login' element={<Login/>}/>
+            {/* <Route path='*'element={<NotFound/>}/> */}
+        </Routes>
+        <Footer/>
+        </BrowserRouter>
   );
 }
 

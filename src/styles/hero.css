@@ -7,15 +7,17 @@
     display: flex;
     align-items: center;
     padding-left: 100px;
+    margin-bottom: 40px;
 }
 .hero-content {
-    color: #fff;
+    color:rgb(7, 39, 128);
 }
 .hero-content h1 {
     font-size: 60px;
     line-height: 1.1;
     margin-bottom: 20px;
     font-weight: 700;
+    font-family: 'Courier New', Courier, monospace;
 }
 .hero-content p {
     font-size: 20px;
@@ -30,9 +32,8 @@
     text-decoration: none;
     padding: 15px 30px;
     font-weight: 700;
-    border-radius: 5px;
     transition: background-color 0.3s;
 }
 .cta-button:hover {
-    background-color: #c62828;
+    background-color: #6d0707;
 }

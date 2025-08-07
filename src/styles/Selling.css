@@ -1,0 +1,25 @@
+.sell h1{
+    text-align: center;
+    color:rgb(5, 4, 63);
+}
+.selling-card{
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+}
+.card p{
+    text-align: center;
+    color: grey;
+}
+.card button{
+    background-color:rgb(185, 18, 18);
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    border:none;
+    color: white;
+}
+.card{
+    display: grid;
+    align-items: center;
+}
