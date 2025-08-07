@@ -10,6 +10,7 @@ import Login from './components/Login';
 import Homepage from './pages/Homepage';
 import Footer from './components/Footer';
 import SignInPage from './components/SigninPage';
+import ProductList from './components/ProductList';
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
         <Header/>
         <Routes>
             <Route path='/'element={<Homepage/>}/>
-            <Route path='/shop' element={<Shop/>}/>
+            <Route path='/shop' element={<ProductList/>}/>
             <Route path='/blog' element={<Blog/>}/>
             <Route path='/about' element={<About/>}/>
             <Route path='/contact' element={<Contact/>}/>

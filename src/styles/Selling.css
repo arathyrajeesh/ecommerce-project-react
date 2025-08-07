@@ -41,20 +41,16 @@
     cursor: pointer;
 }
 
-.product-card:hover {
-    background-color: #f0f0f0; 
-    transform: translateY(-5px); 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.product-card:hover .product-image {
-    filter: brightness(90%);
-}
 
 .product-image {
     width: 100%;
-    height: auto;
-    transition: filter 0.3s ease-in-out; 
+    height: 250px;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+.product-image:hover {
+    filter: brightness(80%);
 }
 
 .product-title {
