@@ -1,10 +1,15 @@
 .top-banner {
     background-color: #f7f7f7;
-    color:rgb(226, 58, 58);
+    color: rgb(226, 58, 58);
     text-align: center;
     padding: 8px 0;
     font-size: 20px;
     letter-spacing: 1px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
 }
 
 .main-header {
@@ -12,18 +17,28 @@
     justify-content: space-between;
     align-items: center;
     padding: 30px 50px;
-    background-color:white;
+    background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 40px; 
+    left: 0;
+    right: 0;
+    z-index: 998;
+}
+
+body {
+    padding-top: 120px; 
 }
 
 .logo {
     background-color: #0d1235;
     color: #fff;
-    padding: 15px 25px;
-    font-size: 18px;
-    font-weight: 700;
+    padding: 20px 40px;       
+    font-size: 24px;          
+    font-weight: 800;
     text-decoration: none;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    border-radius: 6px;       
 }
 
 .header-nav {
@@ -54,11 +69,10 @@
     .top-banner {
         font-size: 16px;
     }
-    
+
     .header-nav {
         flex-direction: column;
         gap: 15px;
         text-align: center;
     }
 }
-

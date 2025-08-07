@@ -1,19 +1,18 @@
 import React from 'react';
 import '../styles/GivingBack.css';
 import { GivingBackData } from '../data/GivingBack';
-import GivingBackCard from './GivingBackCard';
+import GivingBackCard from './GivingBackCard'; 
 
 const GivingBack = () => {
     return (
-        <div className='giving-back'>
-            <h1>GIVING BACK</h1>
-            <div className='card-container'>
-                {
-                    GivingBackData.map((item, idx) => <GivingBackCard data={item} key={idx} />)
-                }
-            </div>
-            <button className='read-more'>Read More</button>
+        <section className="giving-back">
+        <h2 className="giving-back-title">GIVING BACK</h2>
+        <div className="giving-back-cards">
+            {GivingBackData.map((data, index) => (
+            <GivingBackCard key={index} data={data} index={index} />
+            ))}
         </div>
+        </section>
     );
 };
 
