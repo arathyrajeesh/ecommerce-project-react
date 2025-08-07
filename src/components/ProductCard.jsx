@@ -7,7 +7,7 @@ const ProductCard = ({ product, onAddToCart }) => {
             <p className="product-price">${product.price.toFixed(2)}</p>
         
             <div className="product-buttons">
-                <button className="buy-btn" >
+                <button className="buy-btn" onClick={() => onAddToCart(product)}>
                     Buy Now
                 </button>
                 <button className="overview-btn" >
