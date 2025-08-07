@@ -37,7 +37,7 @@ function Header() {
                     <li><Link to={'/blog'}>BLOG</Link></li>
                     <li><Link to={'/about'}>ABOUT</Link></li>
                     <li><Link to={'/contact'}>CONTACT</Link></li>
-                    <li><Link to={'/login'}>Login</Link></li>
+                    <li><Link to={'/login'}>LOGIN</Link></li>
             </nav>
             <div className="header-right">
                 <a href="#" className="cart-icon"></a>

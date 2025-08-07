@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import PromoBanners from '../components/PromoBanner'
 import GivingBack from '../components/GivingBack'
 import Selling from '../components/Selling'
+import ImageSlider from '../components/ImageSlide'
 
 const Homepage = () => {
     return (
@@ -11,6 +12,7 @@ const Homepage = () => {
         <PromoBanners/>
         <GivingBack/>
         <Selling/>
+        <ImageSlider/>
         </>
     )
 }

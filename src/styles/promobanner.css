@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     gap: 70px;
 }
+
 .promo-item {
     flex: 1 1 30%;
     height: 350px;
@@ -14,11 +15,13 @@
     position: relative;
     overflow: hidden;
 }
+
 .promo-item h3 {
     font-size: 30px;
     font-family: "Open Sans", Arial, sans-serif;    
     margin-bottom: 1px;
 }
+
 /* .promo-item p {
     font-size: 14px;
     line-height: 1.5;
@@ -29,13 +32,28 @@
     background-size: cover;
     background-position: center;
 }
+
 .second {
     background-image: url('https://static.wixstatic.com/media/82fcd3_f158f908b5da4ae1aaec990543c59c22~mv2_d_3861_2574_s_4_2.jpg/v1/fill/w_731,h_399,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/82fcd3_f158f908b5da4ae1aaec990543c59c22~mv2_d_3861_2574_s_4_2.jpg');
     background-size: cover;
     background-position: center;
 }
+
 .third {
     background-image: url('https://static.wixstatic.com/media/82fcd3_d88b234e84db4d85bef07af23ec06ab0~mv2_d_4150_3744_s_4_2.jpg/v1/fill/w_758,h_386,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/82fcd3_d88b234e84db4d85bef07af23ec06ab0~mv2_d_4150_3744_s_4_2.jpg');
     background-size: cover;
     background-position: center;
 }
+
+@media (max-width: 768px) {
+    .promo-banners {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .promo-item {
+        height: 250px;
+        padding-left: 20px;
+    }
+}
+
