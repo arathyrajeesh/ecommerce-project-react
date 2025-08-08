@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SellingCard = (props) => {
     const { data } = props;
@@ -23,7 +24,7 @@ const SellingCard = (props) => {
                 )}
             </div>
             <hr className="product-divider" />
-            <button className="add-to-cart-btn"> {data.link} </button>
+            <a><button className="add-to-cart-btn"><Link to="/cart">Add to Cart</Link></button></a>
         </div>
     );
 };

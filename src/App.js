@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import SignInPage from './components/SigninPage';
 import ProductList from './components/ProductList';
 import Overview from './components/Overview';
+import Cart from './pages/Cart';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path='/login' element={<Login/>}/>
             <Route path="/signup" element={<SignInPage/>} />
             <Route path='/overview' element = {<Overview/>} />
+            <Route path='/cart' element = {<Cart/>}/>
             {/* <Route path='*'element={<NotFound/>}/> */}
         </Routes>
         <Footer/>

@@ -2,6 +2,9 @@ import React from 'react';
 import '../styles/Selling.css';
 import { SellingData } from '../data/Selling';
 import SellingCard from './SellingCard';
+import { Link } from 'react-router-dom';
+
+
 
 const Selling = () => {
     return (
@@ -10,14 +13,14 @@ const Selling = () => {
                 <hr className='divider-line' />
                 <h1>OUR BEST-SELLING EQUIPMENT</h1>
                 <hr className='divider-line' />
-                </div>
+            </div>
             <div className='selling-card'>
                 {
                     SellingData.map((item, idx) => <SellingCard data={item} key={idx} />)
                 }
             </div>
             <div className='shop-all-container'>
-                <button className='shop-all-btn'>Shop All</button>
+                <a><button className='shop-all-btn'><Link to ='/shop'>Shop All</Link></button></a>              
             </div>        
         </div>
     );

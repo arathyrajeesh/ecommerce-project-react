@@ -15,7 +15,7 @@ const ProductCard = ({ product, onAddToCart }) => {
                 <button className="buy-btn" onClick={() => onAddToCart(product)}>
                     Buy Now
                 </button>
-                <a><button className="overview-btn"><Link to ="/overview">OverView</Link></button></a>
+                <button className="overview-btn"><Link to ="/overview">OverView</Link></button>
             </div>
         </div>
         </div>

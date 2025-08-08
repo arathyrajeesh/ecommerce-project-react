@@ -38,11 +38,8 @@ function Header() {
                     <li><Link to={'/about'}>ABOUT</Link></li>
                     <li><Link to={'/contact'}>CONTACT</Link></li>
                     <li><Link to={'/login'}>LOGIN</Link></li>
+                    <li><Link to= {'/cart'}>CART</Link></li>
             </nav>
-            <div className="header-right">
-                <img src="https://i.imgur.com/GELbsOW.png" className="cartIcon" />
-                <div id="cartIcon"></div>
-            </div>
         </header>
         </>
     );
