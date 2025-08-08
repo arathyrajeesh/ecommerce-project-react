@@ -1,24 +1,23 @@
-import { Link } from "react-router-dom";
-
-
-
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product, onAddToCart, onShowOverview }) => {
     return (
         <div className="product">
-        <div className="product-card">
-            <img src={product.image}/>
-        
-            <h4 className="product-name">{product.name}</h4>
-            <p className="product-price">${product.price.toFixed(2)}</p>
-        
-            <div className="product-buttons">
-                <button className="buy-btn" onClick={() => onAddToCart(product)}>
-                    Buy Now
-                </button>
-                <button className="overview-btn"><Link to ="/overview">OverView</Link></button>
+            <div className="product-card">
+                <img src={product.image} alt={product.name}/>
+            
+                <h4 className="product-name">{product.name}</h4>
+                <p className="product-price">${product.price.toFixed(2)}</p>
+            
+                <div className="product-buttons">
+                    <button className="buy-btn" onClick={() => onAddToCart(product)}>
+                        Add to Cart
+                    </button>
+                    <button className="overview-btn" onClick={() => onShowOverview(product)}>
+                        Overview
+                    </button>
+                </div>
             </div>
-        </div>
         </div>
     );
 };
-export default ProductCard
+
+export default ProductCard;
