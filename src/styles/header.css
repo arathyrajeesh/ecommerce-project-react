@@ -11,6 +11,18 @@
     right: 0;
     z-index: 999;
 }
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
 
 .main-header {
     display: flex;

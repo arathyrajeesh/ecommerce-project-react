@@ -12,8 +12,7 @@ import Footer from './components/Footer';
 import SignInPage from './components/SigninPage';
 import ProductList from './components/ProductList';
 import Overview from './components/Overview';
-import Cart from './pages/Cart';
-
+import Cart from './components/Cart';
 
 function App() {
   return (

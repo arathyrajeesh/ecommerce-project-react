@@ -1,10 +1,9 @@
+// src/components/Selling.jsx
 import React from 'react';
 import '../styles/Selling.css';
 import { SellingData } from '../data/Selling';
 import SellingCard from './SellingCard';
 import { Link } from 'react-router-dom';
-
-
 
 const Selling = () => {
     return (
@@ -20,8 +19,10 @@ const Selling = () => {
                 }
             </div>
             <div className='shop-all-container'>
-                <a><button className='shop-all-btn'><Link to ='/shop'>Shop All</Link></button></a>              
-            </div>        
+                <Link to='/shop'>
+                    <button className='shop-all-btn'>Shop All</button>
+                </Link>
+            </div>
         </div>
     );
 };
