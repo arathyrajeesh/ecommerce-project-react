@@ -55,6 +55,12 @@ body {
     transition: color 0.3s;
 }
 
+.cartIcon {
+    width: 40px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
 .header-nav a:hover {
     color: #e53935;
 }

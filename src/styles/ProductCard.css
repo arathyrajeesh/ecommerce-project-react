@@ -71,7 +71,17 @@
 
 .overview-btn {
     background-color: grey;
+    text-decoration: none;
+    color: white;
 }
 .overview-btn:hover {
     background-color: rgb(56, 54, 54);
+}
+.Load-btn{
+    background-color: #3f2121;
+}
+.product-buttons a{
+    background-color:grey;
+    color: white;
+    text-decoration: none;
 }

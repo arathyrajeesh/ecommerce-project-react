@@ -11,10 +11,14 @@ const ProductList = () => {
                 <ProductCard 
                     key={product.id} 
                     product={product} 
-                    onAddToCart={() => console.log("Add to Cart:", product.name)}
+                    onAddToCart={() => console.log("Add to Cart:", product)}
                 />
             ))}
+            <div className='load-container'>
+                <button className='load-btn'>Shop All</button>
+            </div>
         </div>
+        
     );
 };
 

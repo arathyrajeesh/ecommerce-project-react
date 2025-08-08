@@ -11,6 +11,7 @@ import Homepage from './pages/Homepage';
 import Footer from './components/Footer';
 import SignInPage from './components/SigninPage';
 import ProductList from './components/ProductList';
+import Overview from './components/Overview';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path='/contact' element={<Contact/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path="/signup" element={<SignInPage/>} />
+            <Route path='/overview' element = {<Overview/>} />
             {/* <Route path='*'element={<NotFound/>}/> */}
         </Routes>
         <Footer/>

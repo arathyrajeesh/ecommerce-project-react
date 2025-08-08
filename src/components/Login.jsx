@@ -9,7 +9,7 @@ const LoginPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Login attempt with:', { email, password });
-        alert('Login functionality is not yet implemented.');
+        // alert('Login ');
     };
 
     return (

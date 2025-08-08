@@ -40,7 +40,8 @@ function Header() {
                     <li><Link to={'/login'}>LOGIN</Link></li>
             </nav>
             <div className="header-right">
-                <a href="#" className="cart-icon"></a>
+                <img src="https://i.imgur.com/GELbsOW.png" className="cartIcon" />
+                <div id="cartIcon"></div>
             </div>
         </header>
         </>
