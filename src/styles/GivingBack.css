@@ -1,5 +1,4 @@
-    /* src/components/GivingBack.css */
-    .giving-back {
+.giving-back {
         text-align: center;
         background-color: #f9f9f9;
         padding: 60px 20px;
@@ -63,7 +62,6 @@
         background-color: #3a2a8b;
     }
     
-    /* Responsive */
     @media (max-width: 768px) {
         .giving-back-cards {
         flex-direction: column;

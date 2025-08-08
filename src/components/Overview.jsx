@@ -19,7 +19,6 @@ const ProductOverviewModal = ({ product, onClose, onAddToCart }) => {
                         <p className="modal-price">${product.price.toFixed(2)}</p>
                         <p className="modal-sku">SKU: 0015</p>
                         <div className="modal-options">
-                            <p>Color: Red</p>
                             <p>Quantity:</p>
                             <div className="quantity-selector">
                                 <input type="number" defaultValue="1" min="1" />
