@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import '../styles/header.css';
+import { VscAccount } from "react-icons/vsc";
 
 function Header() {
     const bannerMessages = ["15% OFF ALL TENTS", "WE SHIP WORLDWIDE"];
@@ -43,7 +44,11 @@ function Header() {
                     <li><Link to="/blog">BLOG</Link></li>
                     <li><Link to="/about">ABOUT</Link></li>
                     <li><Link to="/contact">CONTACT</Link></li>
-                    <li><Link to="/login">LOGIN</Link></li>
+                    <li>
+                        <Link to="/login" className='cart-link'>
+                            <VscAccount size={20}/>
+                        </Link>
+                    </li>
                     <li>
                         <Link to="/cart" className="cart-link">
                             <FaShoppingCart size={20} />

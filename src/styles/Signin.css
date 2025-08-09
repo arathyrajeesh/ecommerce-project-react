@@ -45,7 +45,7 @@
     width: 100%;
     padding: 15px;
     border: none;
-    background-color: #c90f33;
+    background-color: #1a1a5b;
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
@@ -55,7 +55,7 @@
 }
 
 .auth-button:hover {
-    background-color: #a30c2a;
+    background-color:#111144;
 }
 
 .auth-link-text {
@@ -66,7 +66,7 @@
 }
 
 .auth-link-text a {
-    color: #c90f33;
+    color: #111144;
     text-decoration: none;
     font-weight: bold;
 }
