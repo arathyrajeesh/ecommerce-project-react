@@ -12,7 +12,7 @@ const ProductCard = ({ product, onAddToCart, onShowOverview }) => {
     return (
         <div className="product">
             <div className="product-card">
-                <img src={product.image} alt={product.name} onClick={handleClick} style={{ cursor: 'pointer' }} />
+                <img src={product.image}  onClick={handleClick} style={{ cursor: 'pointer' }} />
             
                 <h4 className="product-name">{product.name}</h4>
                 <p className="product-price">${product.price.toFixed(2)}</p>
