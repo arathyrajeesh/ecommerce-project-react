@@ -13,6 +13,7 @@ import SignInPage from './components/SigninPage';
 import ProductList from './components/ProductList';
 import Overview from './components/Overview';
 import Cart from './components/Cart';
+import Another from './components/Another';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/signup" element={<SignInPage/>} />
             <Route path='/overview' element = {<Overview/>} />
             <Route path='/cart' element = {<Cart/>}/>
+            <Route path='/another-page' element = {<Another/>}/>
             {/* <Route path='*'element={<NotFound/>}/> */}
         </Routes>
         <Footer/>
