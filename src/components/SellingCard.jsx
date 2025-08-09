@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SellingCard = ({ data }) => {
-    // The useNavigate hook is no longer needed if you're not navigating, but we'll keep it just in case you want to use it for other links.
     const navigate = useNavigate();
 
     const handleAddToCart = () => {
@@ -16,13 +15,7 @@ const SellingCard = ({ data }) => {
         }
 
         localStorage.setItem("cart", JSON.stringify(cart));
-        
-        // This line dispatches an event that the Header component is listening for.
-        // It's what makes the cart count update automatically.
         window.dispatchEvent(new Event("cartUpdated"));
-
-        // *** REMOVED: The navigate("/cart") call has been removed. ***
-        // The user will now remain on the current page.
     };
 
     return (

@@ -1,4 +1,3 @@
-// src/components/Cart.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Cart.css';

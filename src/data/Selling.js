@@ -1,8 +1,7 @@
-// src/data/Selling.js
 export const SellingData = [
     {
         id: 1,
-        title: 'Lightweight Backpack', // Unique title for clarity
+        title: 'Lightweight Backpack', 
         image: 'https://static.wixstatic.com/media/82fcd3_c075e7ce4f8e4a07821dae5001d9f9e9~mv2_d_1920_1920_s_2.jpg/v1/fill/w_248,h_248,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/82fcd3_c075e7ce4f8e4a07821dae5001d9f9e9~mv2_d_1920_1920_s_2.jpg',
         price: 45.00,
     },

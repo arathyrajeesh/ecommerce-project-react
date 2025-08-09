@@ -1,4 +1,3 @@
-// src/components/Selling.jsx
 import React from 'react';
 import '../styles/Selling.css';
 import { SellingData } from '../data/Selling';
