@@ -18,7 +18,7 @@ const Cart = () => {
 
     const removeItem = (id) => {
         const updatedCart = cartItems.filter(item => item.id !== id);
-        updateCart(updatedCart);
+        updateCart(updatedCart); 
     };
 
     const increaseQuantity = (id) => {
@@ -38,7 +38,7 @@ const Cart = () => {
             }
             return item;
         }).filter(Boolean);
-        updateCart(updatedCart);
+        updateCart(updatedCart); 
     };
 
     const totalPrice = cartItems.reduce((total, item) => {

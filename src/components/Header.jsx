@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import '../styles/header.css';
 import { VscAccount } from "react-icons/vsc";
@@ -9,8 +9,10 @@ function Header() {
     const [currentBannerText, setCurrentBannerText] = useState(bannerMessages[0]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [cartCount, setCartCount] = useState(0);
-
+    
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // Use the useNavigate hook for navigation
+    const navigate = useNavigate();
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -38,12 +40,6 @@ function Header() {
         window.addEventListener("cartUpdated", updateCount);
         return () => window.removeEventListener("cartUpdated", updateCount);
     }, []);
-
-    const handleLogout = () => {
-        localStorage.removeItem('access_token');
-        setIsLoggedIn(false);
-        
-    };
 
     return (
         <>
