@@ -9,8 +9,8 @@ const SignInPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Sign-up attempt with:', { name, email, password });
-        alert('Sign-up functionality is not yet implemented.');
+        console.log('Sign-up with:', { name, email, password });
+        // alert('Sign-up ');
     };
 
     return (
@@ -25,7 +25,6 @@ const SignInPage = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Enter your name"
-                        required
                     />
                 </div>
                 <div className="form-group">
@@ -36,7 +35,6 @@ const SignInPage = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email"
-                        required
                     />
                 </div>
                 <div className="form-group">
@@ -47,7 +45,6 @@ const SignInPage = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Create a password"
-                        required
                     />
                 </div>
                 <button type="submit" className="auth-button">Sign Up</button>
