@@ -1,7 +1,7 @@
 export const products = [
     {
         id: 1,
-        name: "Sleeping Bag",
+        name: "Backpack",
         price: 65.00,
         image: "https://static.wixstatic.com/media/82fcd3_3d31d1815e744c1fbf538688e0439043~mv2_d_1920_1920_s_2.jpg/v1/fill/w_481,h_481,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/82fcd3_3d31d1815e744c1fbf538688e0439043~mv2_d_1920_1920_s_2.jpg",
     },
@@ -19,44 +19,44 @@ export const products = [
     },
     {
         id: 4,
-        name: "Rain Coat Yellow",
+        name: "orange Yoga sheet",
         price: 55.00,
         image: "https://static.wixstatic.com/media/82fcd3_c075e7ce4f8e4a07821dae5001d9f9e9~mv2_d_1920_1920_s_2.jpg/v1/fill/w_321,h_321,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/82fcd3_c075e7ce4f8e4a07821dae5001d9f9e9~mv2_d_1920_1920_s_2.jpg",
     },    
     {
         id: 5,
-        name: "Hiking Boots",
+        name: "Travel bag",
         price: 500.00,
         image: "https://static.wixstatic.com/media/82fcd3_6a581d382be848e99c1a3352ed9c23b7~mv2_d_1920_1920_s_2.jpg/v1/fill/w_321,h_321,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/82fcd3_6a581d382be848e99c1a3352ed9c23b7~mv2_d_1920_1920_s_2.jpg",
     },    
     {
         id: 6,
-        name: "Backpack",
+        name: "Coat",
         price: 200.00,
         image: "https://static.wixstatic.com/media/82fcd3_6c96a002f3b944829a299a89e2126505~mv2_d_1920_1920_s_2.jpg/v1/fill/w_321,h_321,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/82fcd3_6c96a002f3b944829a299a89e2126505~mv2_d_1920_1920_s_2.jpg",
     },    
     
     {
         id: 7,
-        name: "Water Bottle",
+        name: "Tent",
         price: 340.00,
         image: "https://static.wixstatic.com/media/82fcd3_cda48930e2d5420abccdd996a45d93d3~mv2_d_1920_1920_s_2.jpg/v1/fill/w_321,h_321,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/82fcd3_cda48930e2d5420abccdd996a45d93d3~mv2_d_1920_1920_s_2.jpg",
     },    
     {
         id: 8,
-        name: "First Aid Kit",
+        name: "Bed",
         price: 100.00,
         image: "https://static.wixstatic.com/media/84770f_384e19b175f744719a9775a508168cba~mv2_d_1920_1920_s_2.jpg/v1/fill/w_321,h_321,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/84770f_384e19b175f744719a9775a508168cba~mv2_d_1920_1920_s_2.jpg",
     },
     {
         id: 9,
-        name: "Camp Chair",
+        name: "Coat",
         price: 900.00,
         image: "https://static.wixstatic.com/media/82fcd3_6071b28264bc48dc934cf96b96cb7043~mv2_d_1920_1920_s_2.jpg/v1/fill/w_321,h_321,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/82fcd3_6071b28264bc48dc934cf96b96cb7043~mv2_d_1920_1920_s_2.jpg",
     },
     {
         id: 10,
-        name: "Camp Table",
+        name: "Coat",
         price: 850.00,
         image: "https://static.wixstatic.com/media/82fcd3_75ad58a062714b22aed0ad2d08aecba9~mv2_d_1920_1920_s_2.jpg/v1/fill/w_321,h_321,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/82fcd3_75ad58a062714b22aed0ad2d08aecba9~mv2_d_1920_1920_s_2.jpg",
     },

@@ -6,12 +6,12 @@
     background-position: center;
     display: flex;
     align-items: center;
-    padding-left: 100px;
+    padding-left: 50px;
     margin-bottom: 40px;
 }
 
 .hero-content {
-    color:rgb(7, 39, 128);
+    color:rgb(5, 29, 94);
 }
 
 .hero-content h1 {

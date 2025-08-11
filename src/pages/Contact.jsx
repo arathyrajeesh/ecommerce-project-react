@@ -60,8 +60,16 @@ const Contact = () => {
                                 <label htmlFor="phone">Phone</label>
                                 <div className="phone-input">
                                     <select>
-                                        <option>+91</option>
-                                        <option>+34</option>
+                                        <option value="+44">+91 (IN)</option>
+                                        <option value="+1">+1 (USA)</option>
+                                        <option value="+44">+44 (UK)</option>
+                                        <option value="+44">+93 (AF)</option>
+                                        <option value="+44">+54 (ARG)</option>
+                                        <option value="+44">+55 (BR)</option>
+                                        <option value="+44">+92 (PAK)</option>
+                                        <option value="+44">+20 (EG)</option>                                        <option value="+44">+20 (EG)</option>
+                                        <option value="+44">+81 (JP)</option>
+                                        <option value="+44">+57 (CO)</option>
                                     </select>
                                     <input type="tel" id="phone" name="phone" />
                                 </div>
@@ -78,17 +86,6 @@ const Contact = () => {
                         </div>
                     </form>
                 </div>
-            </div>
-            <div className="map-container">
-                <iframe
-                    title="Our Location"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019299383516!2d-122.38769598468054!3d37.77063977975971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808f7e28b0c7e8a7%3A0x9c7c8a3a6a74b0!2s500%20Terry%20Francois%20St%2C%20San%20Francisco%2C%20CA%2094158%2C%20USA!5e0!3m2!1sen!2sus!4v1620836321934!5m2!1sen!2sus"
-                    width="100%"
-                    height="400"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                ></iframe>
             </div>
         </div>
     );
