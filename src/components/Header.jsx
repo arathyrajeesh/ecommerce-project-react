@@ -10,6 +10,8 @@ function Header() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [cartCount, setCartCount] = useState(0);
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentIndex(prev => (prev + 1) % bannerMessages.length);
@@ -20,6 +22,12 @@ function Header() {
     }, [currentIndex]);
 
     useEffect(() => {
+        const checkLoginStatus = () => {
+            const token = localStorage.getItem('access_token');
+            setIsLoggedIn(!!token); 
+        };
+        checkLoginStatus(); 
+
         const updateCount = () => {
             const cart = JSON.parse(localStorage.getItem("cart")) || [];
             const total = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -30,6 +38,12 @@ function Header() {
         window.addEventListener("cartUpdated", updateCount);
         return () => window.removeEventListener("cartUpdated", updateCount);
     }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        setIsLoggedIn(false);
+        
+    };
 
     return (
         <>
@@ -44,11 +58,24 @@ function Header() {
                     <li><Link to="/blog">BLOG</Link></li>
                     <li><Link to="/about">ABOUT</Link></li>
                     <li><Link to="/contact">CONTACT</Link></li>
-                    <li>
-                        <Link to="/login" className='cart-link'>
-                            <VscAccount size={20}/>
-                        </Link>
-                    </li>
+                    
+                    {isLoggedIn ? (
+                        <>
+                            <li>
+                                <Link to="/user" className='user-link'>
+                                    <VscAccount size={20} />
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/" onClick={handleLogout}>LOGOUT</Link>
+                            </li>
+                        </>
+                    ) : (
+                        <li>
+                            <Link to="/login">LOGIN</Link>
+                        </li>
+                    )}
+
                     <li>
                         <Link to="/cart" className="cart-link">
                             <FaShoppingCart size={20} />
