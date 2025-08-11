@@ -26,19 +26,13 @@ const LoginPage = () => {
                 'https://ecommerce-project-backend-nodejs.onrender.com/api/auth/login',
                 userData
             );
-
-            // Check the API response structure here
-            // If the token is directly in res.data, use res.data.token
-            // If it's nested like the user data, it might be res.data.data.token
             const token = res.data.token; 
 
             if (token) {
-                // Save the token to localStorage
                 localStorage.setItem('access_token', token);
                 toast.success('Login Successful');
                 navigate('/');
             } else {
-                // If the token is not in the expected location
                 toast.error('Authentication token not received. Please try again.');
             }
 

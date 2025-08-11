@@ -19,7 +19,6 @@ function UserProfile() {
                     setError('Authentication token not found.');
                     setLoading(false);
                     toast.error('Please log in to view your profile.');
-                    // Redirect to login if no token is found
                     navigate('/login');
                     return;
                 }
@@ -47,15 +46,11 @@ function UserProfile() {
         };
 
         fetchUserProfile();
-    }, [navigate]); // Added navigate to the dependency array
+    }, [navigate]); 
 
-    // Handler function for logging out
     const handleLogout = () => {
-        // Remove the token from local storage
         localStorage.removeItem('access_token');
-        // Show a success message
         toast.success('Logged out successfully!');
-        // Redirect the user to the login page
         navigate('/login'); 
     };
 
@@ -75,7 +70,7 @@ function UserProfile() {
         <div className="user-profile-container">
             <div className="profile-card">
                 <FaUserCircle size={80} color="#007bff" />
-                <h2>User Profile</h2>
+                <h2>Profile</h2>
                 <p>Name: <strong>{user.name}</strong></p>
                 <p>Email: <strong>{user.email}</strong></p>
                 <button className="logout-button" onClick={handleLogout}>Log Out</button>

@@ -74,19 +74,16 @@
 .auth-link-text a:hover {
     text-decoration: underline;
 }
-/* Styling for the password input container */
 .password-input-container {
     position: relative;
     width: 100%;
 }
 
-/* Styling for the input field inside the container */
 .password-input-container input {
     width: 100%;
-    padding-right: 40px; /* Make space for the button */
+    padding-right: 40px; 
 }
 
-/* Styling for the "Show/Hide" button */
 .show-password-button {
     position: absolute;
     right: 10px;
