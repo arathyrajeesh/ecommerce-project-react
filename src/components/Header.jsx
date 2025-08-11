@@ -66,9 +66,6 @@ function Header() {
                                     <VscAccount size={20} />
                                 </Link>
                             </li>
-                            <li>
-                                <Link to="/" onClick={handleLogout}>LOGOUT</Link>
-                            </li>
                         </>
                     ) : (
                         <li>
