@@ -53,3 +53,18 @@
     color: #dc3545;
     font-weight: bold;
 }
+.logout-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: black;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.logout-button:hover {
+    background-color: rgb(69, 69, 69);
+}

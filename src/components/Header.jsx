@@ -11,7 +11,6 @@ function Header() {
     const [cartCount, setCartCount] = useState(0);
     
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // Use the useNavigate hook for navigation
     const navigate = useNavigate();
 
     useEffect(() => {
