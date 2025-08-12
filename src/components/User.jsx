@@ -36,7 +36,7 @@ function UserProfile() {
                 setUser(response.data.data); 
                 toast.success('Details fetched successfully!');
             } catch (err) {
-                const msg = err.response?.data?.message || 'Failed to fetch user profile. Please try again later.';
+                const msg = err.response?.data?.message || 'Failed to get user profile. Please try again later.';
                 setError(msg);
                 toast.error(msg);
                 console.error("Error fetching user profile:", err);
@@ -69,7 +69,7 @@ function UserProfile() {
     return (
         <div className="user-profile-container">
             <div className="profile-card">
-                <FaUserCircle size={80} color="#007bff" />
+                <FaUserCircle size={80} color="Black" />
                 <h2>Profile</h2>
                 <p>Name: <strong>{user.name}</strong></p>
                 <p>Email: <strong>{user.email}</strong></p>
