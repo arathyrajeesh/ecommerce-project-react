@@ -9,7 +9,6 @@ function Header() {
     const [currentBannerText, setCurrentBannerText] = useState(bannerMessages[0]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [cartCount, setCartCount] = useState(0);
-    
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
@@ -25,14 +24,19 @@ function Header() {
     useEffect(() => {
         const checkLoginStatus = () => {
             const token = localStorage.getItem('access_token');
-            setIsLoggedIn(!!token); 
+            setIsLoggedIn(!!token);
         };
-        checkLoginStatus(); 
+        checkLoginStatus();
 
         const updateCount = () => {
-            const cart = JSON.parse(localStorage.getItem("cart")) || [];
-            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-            setCartCount(total);
+            const userId = localStorage.getItem('user_id');
+            if (userId) {
+                const cart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || [];
+                const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+                setCartCount(total);
+            } else {
+                setCartCount(0);
+            }
         };
         updateCount();
 
@@ -53,19 +57,13 @@ function Header() {
                     <li><Link to="/blog">BLOG</Link></li>
                     <li><Link to="/about">ABOUT</Link></li>
                     <li><Link to="/contact">CONTACT</Link></li>
-                    
+
                     {isLoggedIn ? (
-                        <>
-                            <li>
-                                <Link to="/user" className='user-link'>
-                                    <VscAccount size={20} />
-                                </Link>
-                            </li>
-                        </>
-                    ) : (
                         <li>
-                            <Link to="/login">LOGIN</Link>
+                            <Link to="/user" className='user-link'><VscAccount size={20} /></Link>
                         </li>
+                    ) : (
+                        <li><Link to="/login">LOGIN</Link></li>
                     )}
 
                     <li>

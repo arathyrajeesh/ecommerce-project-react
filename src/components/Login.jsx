@@ -5,10 +5,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const LoginPage = () => {
-    const [userData, setUserData] = useState({
-        email: '',
-        password: '',
-    });
+    const [userData, setUserData] = useState({ email: '', password: '' });
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -26,18 +23,24 @@ const LoginPage = () => {
                 'https://ecommerce-project-backend-nodejs.onrender.com/api/auth/login',
                 userData
             );
-            const token = res.data.token; 
 
-            if (token) {
+            const token = res.data.token; 
+            const userId = res.data.data.id; 
+
+            if (token && userId) {
                 localStorage.setItem('access_token', token);
+                localStorage.setItem('user_id', userId);
+
+                if (!localStorage.getItem(`cart_${userId}`)) {
+                    localStorage.setItem(`cart_${userId}`, JSON.stringify([]));
+                }
+
                 toast.success('Login Successful');
                 navigate('/');
             } else {
-                toast.error('Authentication token not received. Please try again.');
+                toast.error('Authentication failed. Please try again.');
             }
-
         } catch (error) {
-            console.error(error, 'error');
             const errorMessage = error.response?.data?.message || 'Login failed. Please check your credentials.';
             toast.error(errorMessage);
         } finally {
@@ -50,10 +53,9 @@ const LoginPage = () => {
             <form className="auth-form" onSubmit={handleSubmit}>
                 <h2>Log In</h2>
                 <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                    <label>Email</label>
                     <input
                         type="email"
-                        id="email"
                         name='email'
                         value={userData.email}
                         onChange={handleInputChange}
@@ -62,11 +64,10 @@ const LoginPage = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                    <label>Password</label>
                     <div className="password-input-container">
                         <input
                             type={showPassword ? "text" : "password"}
-                            id="password"
                             name='password'
                             value={userData.password}
                             onChange={handleInputChange}
@@ -82,17 +83,11 @@ const LoginPage = () => {
                         </button>
                     </div>
                 </div>
-
                 <button type="submit" className="auth-button" disabled={loading}>
                     {loading ? 'Logging in...' : 'Log In'}
                 </button>
-                
-                <p className="auth-link-text">
-                    <Link to="/reset-password">Forgot password?</Link>
-                </p>
-                <p className="auth-link-text">
-                    Don't have an account? <Link to="/register">Register here!</Link>
-                </p>
+                <p><Link to="/reset-password">Forgot password?</Link></p>
+                <p>Don't have an account? <Link to="/register">Register here!</Link></p>
             </form>
         </div>
     );
