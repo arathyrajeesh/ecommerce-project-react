@@ -50,10 +50,7 @@ const ProductList = () => {
                 />
             ))}
             
-            <div className='load-container'>
-                <button className='load-btn'>Shop All</button>
-            </div>
-            
+
             <ProductOverviewModal 
                 product={selectedProduct} 
                 onClose={handleCloseOverview} 
