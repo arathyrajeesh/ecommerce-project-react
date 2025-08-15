@@ -85,7 +85,7 @@
     padding: 0.75rem;
     border-radius: 6px;
     border: 1px solid #7f8c8d;
-    background-color: #34495e;
+    background-color: #161616;
     color: #fff;
     font-size: 1rem;
     transition: border-color 0.3s ease;
@@ -109,8 +109,8 @@
 
 .newsletter .submit-btn {
     padding: 0.75rem;
-    background-color: #3498db;
-    color: white;
+    background-color: white;
+    color:black;
     border: none;
     border-radius: 6px;
     font-weight: 600;
