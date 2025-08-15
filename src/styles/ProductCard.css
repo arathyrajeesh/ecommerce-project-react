@@ -1,87 +1,109 @@
 .product-list-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
+    padding: 3rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
 }
+
 .product-card {
-    text-align: center;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #eee;
+    background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
-    
+
 .product-card img {
     width: 100%;
-    max-height: 220px;
-    object-fit: contain;
-    margin-bottom: 15px;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
-    
+
+.product-card img:hover {
+    transform: scale(1.05);
+}
+
 .product-name {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    margin: 10px 0 5px;
+    color: #34495e;
+    margin: 1rem 0 0.5rem;
 }
 
 .product-price {
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #27ae60;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
-    
-.product-actions {
+
+.product-buttons {
     display: flex;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    gap: 0.5rem;
+    padding: 0 1.5rem 1.5rem;
 }
 
-.product-card:hover .product-actions {
-    opacity: 1;
-}
-
-.buy-btn,
-.overview-btn {
-    padding: 8px 16px;
-    font-size: 14px;
+.buy-btn, .overview-btn {
+    padding: 12px 15px;
+    border-radius: 8px;
     border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
-    color: #fff;
+    transition: background-color 0.3s ease;
+    flex-grow: 1;
 }
 
 .buy-btn {
-    background-color:rgb(194, 56, 56);
+    background-color: #3498db;
+    color: #fff;
 }
+
 .buy-btn:hover {
-    background-color:red ;
+    background-color: #2980b9;
 }
 
 .overview-btn {
-    background-color: grey;
-    text-decoration: none;
-    color: white;
+    background-color: #e7e7e7;
+    color: #333;
 }
+
 .overview-btn:hover {
-    background-color: rgb(56, 54, 54);
+    background-color: #dcdcdc;
 }
-.Load-btn{
-    background-color: #3f2121;
+
+.load-container {
+    text-align: center;
+    padding: 3rem 0;
+    grid-column: 1 / -1; 
 }
-.product-buttons a{
-    background-color:grey;
-    color: white;
-    text-decoration: none;
+
+.load-btn {
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.load-btn:hover {
+    background-color: #34495e;
 }
