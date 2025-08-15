@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import '../styles/header.css';
 import { VscAccount } from "react-icons/vsc";
@@ -52,25 +52,27 @@ function Header() {
                     <a href="#" className="logo">MADAGASCAR</a>
                 </div>
                 <nav className="header-nav">
-                    <li><Link to="/">HOME</Link></li>
-                    <li><Link to="/shop">SHOP</Link></li>
-                    <li><Link to="/blog">BLOG</Link></li>
-                    <li><Link to="/about">ABOUT</Link></li>
-                    <li><Link to="/contact">CONTACT</Link></li>
+                    <li><NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>HOME</NavLink></li>
+                    <li><NavLink to="/shop" className={({ isActive }) => isActive ? "active-link" : ""}>SHOP</NavLink></li>
+                    <li><NavLink to="/blog" className={({ isActive }) => isActive ? "active-link" : ""}>BLOG</NavLink></li>
+                    <li><NavLink to="/about" className={({ isActive }) => isActive ? "active-link" : ""}>ABOUT</NavLink></li>
+                    <li><NavLink to="/contact" className={({ isActive }) => isActive ? "active-link" : ""}>CONTACT</NavLink></li>
 
                     {isLoggedIn ? (
                         <li>
-                            <Link to="/user" className='user-link'><VscAccount size={20} /></Link>
+                            <NavLink to="/user" className={({ isActive }) => isActive ? "active-link" : "user-link"}>
+                                <VscAccount size={20} />
+                            </NavLink>
                         </li>
                     ) : (
-                        <li><Link to="/login">LOGIN</Link></li>
+                        <li><NavLink to="/login" className={({ isActive }) => isActive ? "active-link" : ""}>LOGIN</NavLink></li>
                     )}
 
                     <li>
-                        <Link to="/cart" className="cart-link">
+                        <NavLink to="/cart" className={({ isActive }) => isActive ? "active-link cart-link" : "cart-link"}>
                             <FaShoppingCart size={20} />
                             {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-                        </Link>
+                        </NavLink>
                     </li>
                 </nav>
             </header>
