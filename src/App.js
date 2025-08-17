@@ -25,7 +25,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-
+      <ProtectedRoutes/>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/shop" element={<ProductList />} />
@@ -38,12 +38,9 @@ function App() {
         <Route path="/another-page" element={<Another />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/user" element={<UserProfile />} />
-          <Route path="/cart" element={<Cart />} />
-        </Route>
+        <Route path="/user" element={<UserProfile />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
-
       <Footer />
     </BrowserRouter>
   );
