@@ -20,12 +20,22 @@
     z-index: 1000;
 }
 
+.header-left {
+    flex: 0 0 220px;   
+}
+
 .header-left .logo {
+    display: inline-block;
+    width: 100%;      
+    text-align: center;
     font-size: 1.5rem;
-    font-weight: 700;
-    color: #2c3e50;
+    font-weight: 500;
+    color: #eceef0;
     text-decoration: none;
     letter-spacing: 1px;
+    background-color: rgb(5, 13, 88);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
 }
 
 .header-nav {
@@ -35,6 +45,8 @@
     margin: 0;
     padding: 0;
     gap: 1.5rem;
+    flex: 1; 
+    justify-content: flex-end;
 }
 
 .header-nav li a {
@@ -77,6 +89,7 @@
     text-align: center;
     animation: bounce 0.5s ease-in-out;
 }
+
 .active-link {
     color: #030335; 
     font-weight: bold;
@@ -101,13 +114,20 @@
         padding: 1rem;
     }
 
+    .header-left {
+        flex: none;
+        width: 100%; 
+        margin-bottom: 1rem;
+    }
+
+    .header-left .logo {
+        width: auto;
+        display: inline-block;
+    }
+
     .header-nav {
         margin-top: 1rem;
         flex-wrap: wrap;
         justify-content: center;
-    }
-
-    .header-left {
-        margin-bottom: 1rem;
     }
 }
