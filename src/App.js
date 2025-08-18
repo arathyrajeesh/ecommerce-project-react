@@ -20,10 +20,12 @@ import ProtectedRoutes from './hooks/useProtectedRoutes';
 
 import './App.css';
 import ForgotPassword from './components/ForgetPassword';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
     <BrowserRouter>
+    <AuthProvider>
       <Header />
       <ProtectedRoutes/>
       <Routes>
@@ -42,6 +44,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
+      </AuthProvider>
     </BrowserRouter>
   );
 }
