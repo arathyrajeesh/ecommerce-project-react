@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
                 setLoading(false);
                 return;
             }
+
             try {
                 const response = await axios.get(
                     'https://ecommerce-project-backend-nodejs.onrender.com/api/auth/me',
@@ -42,6 +43,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = (token) => {
         localStorage.setItem('access_token', token);
+        // You might fetch the user data here after login
     };
 
     const logout = () => {
