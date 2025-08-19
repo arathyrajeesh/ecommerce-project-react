@@ -38,8 +38,7 @@ const LoginPage = () => {
             }
 
             toast.success('Login Successful');
-
-            navigate('/', { replace: true });
+            navigate('/');
         } else {
             toast.error('Authentication failed. Please try again.');
         }

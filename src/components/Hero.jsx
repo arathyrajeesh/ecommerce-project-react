@@ -1,22 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "../styles/hero.css";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 function Hero() {
-    const { user } = useContext(AuthContext); 
-    const [showMessage, setShowMessage] = useState(false);
-
-    useEffect(() => {
-        if (user) {
-            setShowMessage(true);
-            const timer = setTimeout(() => {
-                setShowMessage(false);
-            }, 3000);
-
-            return () => clearTimeout(timer); 
-        }
-    }, [user]);
+    const { user } = useContext(AuthContext); // get user from context
 
     return (
         <main className="hero-section">
@@ -27,11 +15,11 @@ function Hero() {
             />
 
             <div className="hero-content">
-                {showMessage && (
+                {user ? (
                     <h2 className="welcome-message">
                         Welcome, <span>{user.name}</span> 
                     </h2>
-                )}
+                ) : null}
 
                 <h1>
                     BECOME <br /> ONE WITH <br /> NATURE
