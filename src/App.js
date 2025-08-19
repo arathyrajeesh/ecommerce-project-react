@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import ProtectedRoutes from "./hooks/useProtectedRoutes";
 import ErrorBoundary from "./components/ErrorBoundary";
 import "./App.css";
+import Spinner from "./components/Spinner";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -20,19 +21,13 @@ const UserProfile = lazy(() => import("./components/User"));
 const Logout = lazy(() => import("./components/Logout"));
 const ForgotPassword = lazy(() => import("./components/ForgetPassword"));
 
-// Loader fallback
-const Loader = () => (
-  <div style={{ textAlign: "center", marginTop: "50px" }}>
-    <h2>Loading...</h2>
-  </div>
-);
 
 function App() {
   return (
     <>
       <Header />
       <ErrorBoundary>
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Spinner />}>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
