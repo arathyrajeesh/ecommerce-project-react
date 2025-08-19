@@ -1,9 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
+import { Route, Routes } from 'react-router-dom';
 import Header from '../src/components/Header';
 import Footer from './components/Footer';
-
 import Homepage from './pages/Homepage';
 import Blog from './pages/Blog';
 import About from './pages/About';
@@ -17,17 +15,15 @@ import Register from './components/Register';
 import UserProfile from './components/User';
 import Logout from './components/Logout';
 import ProtectedRoutes from './hooks/useProtectedRoutes';
-
-import './App.css';
 import ForgotPassword from './components/ForgetPassword';
-import { AuthProvider } from './context/AuthContext';
+import './App.css';
+
+
 
 function App() {
   return (
-    <BrowserRouter>
-    <AuthProvider>
+    <>
       <Header />
-      <ProtectedRoutes/>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/shop" element={<ProductList />} />
@@ -40,12 +36,26 @@ function App() {
         <Route path="/another-page" element={<Another />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/user" element={<UserProfile />} />
-        <Route path="/cart" element={<Cart />} />
+
+        <Route
+          path="/user"
+          element={
+            <ProtectedRoutes>
+              <UserProfile />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoutes>
+              <Cart />
+            </ProtectedRoutes>
+          }
+        />
       </Routes>
       <Footer />
-      </AuthProvider>
-    </BrowserRouter>
+    </>
   );
 }
 

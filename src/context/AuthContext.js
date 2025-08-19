@@ -22,28 +22,29 @@ export const AuthProvider = ({ children }) => {
                 const response = await axios.get(
                     'https://ecommerce-project-backend-nodejs.onrender.com/api/auth/me',
                     {
-                        headers: {
-                            Authorization: `Bearer ${accessToken}`,
-                        },
+                        headers: { Authorization: `Bearer ${accessToken}` },
                     }
                 );
                 setUser(response.data.data);
-                toast.success('Details fetched successfully!');
+                console.log("User profile fetched successfully");
             } catch (err) {
                 console.error("Error fetching user profile:", err);
                 localStorage.removeItem('access_token');
                 setUser(null);
+                navigate('/login'); // optional auto-redirect
             } finally {
                 setLoading(false);
             }
         };
 
         fetchUserProfile();
-    }, []);
+    }, [navigate]);
 
-    const login = (token) => {
+    const login = (token, userData) => {
         localStorage.setItem('access_token', token);
-        // You might fetch the user data here after login
+        setUser(userData);
+        toast.success('Logged in successfully!');
+        navigate('/home');
     };
 
     const logout = () => {
