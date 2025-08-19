@@ -16,40 +16,34 @@ import UserProfile from './components/User';
 import Logout from './components/Logout';
 import ProtectedRoutes from './hooks/useProtectedRoutes';
 import ForgotPassword from './components/ForgetPassword';
+
 import './App.css';
-
-
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/shop" element={<ProductList />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/overview" element={<Overview />} />
-        <Route path="/another-page" element={<Another />} />
-        <Route path="/logout" element={<Logout />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
         <Route
-          path="/user"
+          path="/*"
           element={
             <ProtectedRoutes>
-              <UserProfile />
-            </ProtectedRoutes>
-          }
-        />
-        <Route
-          path="/cart"
-          element={
-            <ProtectedRoutes>
-              <Cart />
+              <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/shop" element={<ProductList />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/overview" element={<Overview />} />
+                <Route path="/another-page" element={<Another />} />
+                <Route path="/logout" element={<Logout />} />
+                <Route path="/user" element={<UserProfile />} />
+                <Route path="/cart" element={<Cart />} />
+              </Routes>
             </ProtectedRoutes>
           }
         />
