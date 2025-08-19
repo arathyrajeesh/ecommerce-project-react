@@ -1,53 +1,61 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Header from '../src/components/Header';
-import Footer from './components/Footer';
-import Homepage from './pages/Homepage';
-import Blog from './pages/Blog';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import ProductList from './components/ProductList';
-import Overview from './components/Overview';
-import Cart from './components/Cart';
-import Another from './components/Another';
-import Login from './components/Login';
-import Register from './components/Register';
-import UserProfile from './components/User';
-import Logout from './components/Logout';
-import ProtectedRoutes from './hooks/useProtectedRoutes';
-import ForgotPassword from './components/ForgetPassword';
+import React, { Suspense, lazy } from "react";
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ProtectedRoutes from "./hooks/useProtectedRoutes";
+import ErrorBoundary from "./components/ErrorBoundary";
+import "./App.css";
 
-import './App.css';
+// Lazy-loaded pages
+const Homepage = lazy(() => import("./pages/Homepage"));
+const Blog = lazy(() => import("./pages/Blog"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const ProductList = lazy(() => import("./components/ProductList"));
+const Overview = lazy(() => import("./components/Overview"));
+const Cart = lazy(() => import("./components/Cart"));
+const Another = lazy(() => import("./components/Another"));
+const Login = lazy(() => import("./components/Login"));
+const Register = lazy(() => import("./components/Register"));
+const UserProfile = lazy(() => import("./components/User"));
+const Logout = lazy(() => import("./components/Logout"));
+const ForgotPassword = lazy(() => import("./components/ForgetPassword"));
+
+// Loader fallback
+const Loader = () => (
+  <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <h2>Loading...</h2>
+  </div>
+);
 
 function App() {
   return (
     <>
       <Header />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+      <ErrorBoundary>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
 
-        <Route
-          path="/*"
-          element={
-            <ProtectedRoutes>
-              <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/shop" element={<ProductList />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/overview" element={<Overview />} />
-                <Route path="/another-page" element={<Another />} />
-                <Route path="/logout" element={<Logout />} />
-                <Route path="/user" element={<UserProfile />} />
-                <Route path="/cart" element={<Cart />} />
-              </Routes>
-            </ProtectedRoutes>
-          }
-        />
-      </Routes>
+            {/* Protected Routes */}
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/shop" element={<ProductList />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/overview" element={<Overview />} />
+              <Route path="/another-page" element={<Another />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/user" element={<UserProfile />} />
+              <Route path="/cart" element={<Cart />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
       <Footer />
     </>
   );
