@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
                 console.error("Error fetching user profile:", err);
                 localStorage.removeItem('access_token');
                 setUser(null);
-                navigate('/login'); // optional auto-redirect
+                navigate('/login'); 
             } finally {
                 setLoading(false);
             }
