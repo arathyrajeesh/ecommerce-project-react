@@ -39,7 +39,6 @@ const LoginPage = () => {
 
             toast.success('Login Successful');
 
-            // ✅ redirect instantly to homepage
             navigate('/', { replace: true });
         } else {
             toast.error('Authentication failed. Please try again.');

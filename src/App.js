@@ -6,7 +6,6 @@ import ProtectedRoutes from "./hooks/useProtectedRoutes";
 import ErrorBoundary from "./components/ErrorBoundary";
 import "./App.css";
 
-// Lazy-loaded pages
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Blog = lazy(() => import("./pages/Blog"));
 const About = lazy(() => import("./pages/About"));
@@ -35,12 +34,10 @@ function App() {
       <ErrorBoundary>
         <Suspense fallback={<Loader />}>
           <Routes>
-            {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
-            {/* Protected Routes */}
             <Route element={<ProtectedRoutes />}>
               <Route path="/" element={<Homepage />} />
               <Route path="/shop" element={<ProductList />} />
