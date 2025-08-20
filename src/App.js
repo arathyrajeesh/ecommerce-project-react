@@ -13,9 +13,8 @@ const Blog = lazy(() => import("./pages/Blog"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const ProductList = lazy(() => import("./components/ProductList"));
-const ProductDetails = lazy(() => import("./components/ProductDetails")); // 👈 new
+const ProductDetails = lazy(() => import("./components/ProductDetails")); 
 const Cart = lazy(() => import("./components/Cart"));
-const Another = lazy(() => import("./components/Another"));
 const Login = lazy(() => import("./components/Login"));
 const Register = lazy(() => import("./components/Register"));
 const UserProfile = lazy(() => import("./components/User"));
@@ -40,7 +39,6 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/product/:id" element={<ProductDetails />} />
-              <Route path="/another-page" element={<Another />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/user" element={<UserProfile />} />
               <Route path="/cart" element={<Cart />} />

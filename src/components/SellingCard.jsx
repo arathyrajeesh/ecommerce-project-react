@@ -4,10 +4,6 @@ import { useNavigate } from 'react-router-dom';
 const SellingCard = ({ data, onAddToCart }) => {
     const navigate = useNavigate();
 
-    const handleClick = () => {
-        navigate('/another-page');
-    };
-
     return (
         <div className="product-card">
             {data.status && (
@@ -19,7 +15,6 @@ const SellingCard = ({ data, onAddToCart }) => {
                 src={data.image}
                 alt={data.title}
                 className="product-image"
-                onClick={handleClick}
             />
             <p className="product-title">{data.title}</p>
             <div className="product-price">
