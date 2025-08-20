@@ -13,7 +13,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const ProductList = lazy(() => import("./components/ProductList"));
-const Overview = lazy(() => import("./components/Overview"));
+const ProductDetails = lazy(() => import("./components/ProductDetails")); // 👈 new
 const Cart = lazy(() => import("./components/Cart"));
 const Another = lazy(() => import("./components/Another"));
 const Login = lazy(() => import("./components/Login"));
@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       <Header />
-        <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Spinner />}>
         <ErrorBoundary fallback={<div>Something went wrong</div>}>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -39,7 +39,7 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/overview" element={<Overview />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/another-page" element={<Another />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/user" element={<UserProfile />} />
@@ -48,7 +48,7 @@ function App() {
             </Route>
           </Routes>
         </ErrorBoundary>
-        </Suspense>
+      </Suspense>
       <Footer />
     </>
   );
