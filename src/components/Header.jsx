@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import '../styles/header.css';
 import { VscAccount } from "react-icons/vsc";
+import { CiSearch } from "react-icons/ci";
 
 function Header() {
     const bannerMessages = ["15% OFF ALL TENTS", "WE SHIP WORLDWIDE"];
@@ -57,6 +58,7 @@ function Header() {
                     <li><NavLink to="/blog" className={({ isActive }) => isActive ? "active-link" : ""}>BLOG</NavLink></li>
                     <li><NavLink to="/about" className={({ isActive }) => isActive ? "active-link" : ""}>ABOUT</NavLink></li>
                     <li><NavLink to="/contact" className={({ isActive }) => isActive ? "active-link" : ""}>CONTACT</NavLink></li>
+                    <li><NavLink to="/search" className={({isActive}) => isActive ? "active-link" : ""}><CiSearch size={20}/></NavLink></li>
 
                     {isLoggedIn ? (
                         <li>

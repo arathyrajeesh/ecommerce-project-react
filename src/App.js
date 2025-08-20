@@ -6,6 +6,7 @@ import ProtectedRoutes from "./hooks/useProtectedRoutes";
 import "./App.css";
 import Spinner from "./components/Spinner";
 import ErrorBoundary from './components/ErrorBoundary';
+import Search from "./components/Search";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -25,8 +26,8 @@ function App() {
   return (
     <>
       <Header />
-      <ErrorBoundary>
         <Suspense fallback={<Spinner />}>
+        <ErrorBoundary fallback={<div>Something went wrong</div>}>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -43,10 +44,11 @@ function App() {
               <Route path="/logout" element={<Logout />} />
               <Route path="/user" element={<UserProfile />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/search" element={<Search />} />
             </Route>
           </Routes>
+        </ErrorBoundary>
         </Suspense>
-      </ErrorBoundary>
       <Footer />
     </>
   );
