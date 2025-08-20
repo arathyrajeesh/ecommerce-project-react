@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProtectedRoutes from "./hooks/useProtectedRoutes";
-import ErrorBoundary from "./components/ErrorBoundary";
 import "./App.css";
 import Spinner from "./components/Spinner";
+import ErrorBoundary from './components/ErrorBoundary';
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -21,12 +21,11 @@ const UserProfile = lazy(() => import("./components/User"));
 const Logout = lazy(() => import("./components/Logout"));
 const ForgotPassword = lazy(() => import("./components/ForgetPassword"));
 
-
 function App() {
   return (
     <>
+    <ErrorBoundary>
       <Header />
-      <ErrorBoundary>
         <Suspense fallback={<Spinner />}>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -47,8 +46,8 @@ function App() {
             </Route>
           </Routes>
         </Suspense>
-      </ErrorBoundary>
       <Footer />
+      </ErrorBoundary>
     </>
   );
 }
