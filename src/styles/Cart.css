@@ -137,6 +137,32 @@
 .checkout-btn:hover {
     background: #fb8c00;
 }
+.checkout-message {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-box {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+}
+
+.message-box button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
 
 @media (max-width: 600px) {
     .cart-item {

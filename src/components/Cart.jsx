@@ -4,6 +4,7 @@ import '../styles/Cart.css';
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
+    const [showMessage, setShowMessage] = useState(false);
 
     const getCartKey = () => {
         const userId = localStorage.getItem('user_id');
@@ -50,6 +51,10 @@ const Cart = () => {
         return total + (price * item.quantity);
     }, 0);
 
+    const handleCheckout = () => {
+        setShowMessage(true);
+    };
+
     return (
         <div className="cart-container">
             <h2>Your Cart</h2>
@@ -81,9 +86,20 @@ const Cart = () => {
                     </div>
                     <div className="cart-summary">
                         <h3>Total: ${totalPrice.toFixed(2)}</h3>
-                        <Link to="/checkout"><button className="checkout-btn">Checkout</button></Link>
+                        <button className="checkout-btn" onClick={handleCheckout}>Checkout</button>
                     </div>
                 </>
+            )}
+
+            {/* Popup Message */}
+            {showMessage && (
+                <div className="checkout-message">
+                    <div className="message-box">
+                        <p>We can't accept online orders right now.</p>
+                        <p>Please contact us to complete your purchase.</p>
+                        <button onClick={() => setShowMessage(false)}>Got It</button>
+                    </div>
+                </div>
             )}
         </div>
     );

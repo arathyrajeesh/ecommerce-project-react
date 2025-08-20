@@ -42,7 +42,6 @@
 .line {
     border: none;
     border-bottom: 1px solid #ddd;
-    margin: 1rem 0;
 }
 
 .product-heading {
@@ -94,7 +93,7 @@
 .product-card h4 {
     font-size: 1rem;
     font-weight: 600;
-    color: #2a9d8f;
+    color:#011361;
 }
 
 .no-results {
@@ -104,7 +103,7 @@
     margin-top: 2rem;
 }
 .add-to-cart-btn {
-    background: #2a9d8f;
+    background: #011361;
     color: #fff;
     border: none;
     padding: 10px 16px;
