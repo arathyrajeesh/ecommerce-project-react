@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-
-class ErrorBoundary extends Component {
+import React from "react";
+class ErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
         this.state = { hasError: false, error: null, errorInfo: null };
@@ -22,7 +21,7 @@ class ErrorBoundary extends Component {
     }
 
     render() {
-        console.log("Inside Error Boundary render Function");
+        console.log("Error Found");
 
         return this.state.error ? (
         <h1> Something Went Wrong ... Error Boundary Caught it!</h1>

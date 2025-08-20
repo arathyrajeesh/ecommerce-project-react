@@ -24,8 +24,8 @@ const ForgotPassword = lazy(() => import("./components/ForgetPassword"));
 function App() {
   return (
     <>
-    <ErrorBoundary>
       <Header />
+      <ErrorBoundary>
         <Suspense fallback={<Spinner />}>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -46,8 +46,8 @@ function App() {
             </Route>
           </Routes>
         </Suspense>
-      <Footer />
       </ErrorBoundary>
+      <Footer />
     </>
   );
 }

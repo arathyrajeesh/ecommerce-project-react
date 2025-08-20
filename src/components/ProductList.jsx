@@ -28,7 +28,8 @@ const ProductList = () => {
 
         localStorage.setItem(cartKey, JSON.stringify(cart));
 
-        window.dispatchEvent(new Event("cartUpdated"));
+        window.dispatchEvent(new Event("Added to Cart"));
+        throw Error("Simulating React App Crash!");
     };
 
     const handleOpenOverview = (product) => {
