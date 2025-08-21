@@ -39,6 +39,12 @@ function ProductDetails({ addToCart }) {
                 >
                     Add to Cart
                 </button>
+                <button 
+                    className="add-to-cart-btn" 
+                    onClick={() => handleAddToCart(product)}
+                >
+                    OverView
+                </button>
                 <p>{product.info}</p>
             </div>
         </div>
