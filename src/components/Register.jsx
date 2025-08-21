@@ -13,6 +13,7 @@ const Register = () => {
         role: 'customer'
     });
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleInputChange = (e) => {
         const { value, name } = e.target;
@@ -50,15 +51,40 @@ const Register = () => {
                 <h2>Create an Account</h2>
                 <div className="form-group">
                     <label>Name</label>
-                    <input type="text" name="name" value={userData.name} onChange={handleInputChange} />
+                    <input 
+                    type="text" 
+                    name="name" 
+                    value={userData.name}
+                    placeholder='Enter your Name' 
+                    onChange={handleInputChange} 
+                    />
                 </div>
                 <div className="form-group">
                     <label>Email</label>
-                    <input type="email" name="email" value={userData.email} onChange={handleInputChange} />
+                    <input 
+                    type="email" 
+                    name="email" 
+                    value={userData.email} 
+                    placeholder='Enter your email'
+                    onChange={handleInputChange} 
+                    />
                 </div>
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" name="password" value={userData.password} onChange={handleInputChange} />
+                    <input 
+                    type={showPassword ? 'text' : 'password'} 
+                    name="password" 
+                    value={userData.password} 
+                    placeholder="Enter your password"
+                    onChange={handleInputChange} 
+                    />
+                    <button
+                    type="button"
+                    className="show-password-button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    >
+                    {showPassword ? 'Hide' : 'Show'}
+                    </button>
                 </div>
                 <button type="submit" className="auth-button" disabled={loading}>
                     {loading ? 'Loading...' : 'Register'}
