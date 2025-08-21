@@ -1,38 +1,31 @@
-import React from 'react';
-import '../styles/Overview.css';
+import { useParams } from "react-router-dom";
+import { products } from "../data/ProductData";
+import "../styles/Overview.css";
 
-const ProductOverviewModal = ({ product, onClose, onAddToCart }) => {
-    if (!product) {
-        return null; 
-    }
+const OverviewPage = () => {
+    const { id } = useParams();
+    const product = products.find(p => p.id === parseInt(id));
+
+    if (!product) return <h2 className="not-found">Product not found</h2>;
 
     return (
-        <div className="modal-overlay">
-            <div className="modal-content">
-                <button className="close-btn" onClick={onClose}>&times;</button>
-                <div className="modal-body">
-                    <div className="modal-image-container">
-                        <img src={product.image} alt={product.name} className="modal-image" />
-                    </div>
-                    <div className="modal-details">
-                        <h2 className="modal-product-name">{product.name}</h2>
-                        <p className="modal-price">${product.price.toFixed(2)}</p>
-                        <p className="modal-sku">SKU: 0015</p>
-                        <div className="modal-options">
-                            <p>Quantity:</p>
-                            <div className="quantity-selector">
-                                <input type="number" defaultValue="1" min="1" />
-                            </div>
-                        </div>
-                        <button className="modal-add-to-cart-btn" onClick={() => onAddToCart(product)}>
-                            Add to Cart
-                        </button>
-                        <p className="modal-view-details-link">View More Details</p>
-                    </div>
-                </div>
+        <div className="overview-container">
+        <div className="overview-card">
+            <div className="overview-image">
+            <img src={product.image} alt={product.name} />
             </div>
+            <div className="overview-details">
+            <h1>{product.name}</h1>
+            <h2>${product.price.toFixed(2)}</h2>
+            <p className="overview-description">
+                {product.info}
+            </p>
+
+            <button className="overview-btn">Add to Cart</button>
+            </div>
+        </div>
         </div>
     );
 };
 
-export default ProductOverviewModal;
+export default OverviewPage;

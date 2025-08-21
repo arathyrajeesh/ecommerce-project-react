@@ -27,6 +27,12 @@ const ProductList = ({ onAddToCart }) => {
             case 'Name Z-A':
                 filtered.sort((a, b) => b.name.localeCompare(a.name));
                 break;
+            
+            case 'bestseller': 
+                const data = products.filter(item=> item.bestseller === true)
+                console.log(data)
+                setFilteredItems(data)
+                break
             default:
                 break; 
         }
@@ -83,6 +89,8 @@ const ProductList = ({ onAddToCart }) => {
                         <option>Price(high to low)</option>
                         <option>Name A-Z</option>
                         <option>Name Z-A</option>
+                        <option>bestseller</option>
+
                     </select>
                 </div>
             </div>
@@ -96,27 +104,22 @@ const ProductList = ({ onAddToCart }) => {
                 ) : (
                     filteredItems.map((item) => (
                         <div key={item.id} className="product-card">
-                            <Link to={`/productDetails/${item.id}`} className="product-card-link">
-                                <img 
-                                    src={item.image} 
-                                    alt={item.name} 
-                                    style={{ cursor: 'pointer' }} 
-                                />
-                                <h3>{item.name}</h3>
-                                <h4>${item.price.toFixed(2)}</h4>
+                            <Link to={`/productDetails/${item.id}`}>
+                                <img src={item.image} alt={item.name} className="clickable-img" />
                             </Link>
+                            <h3>{item.name}</h3>
+                            <h4>${item.price.toFixed(2)}</h4>
                             <button 
-                                className="add-to-cart-btn"
-                                onClick={() => handleAddToCart(item)}
+                            className="add-to-cart-btn"
+                            onClick={() => handleAddToCart(item)}
                             >
                                 Add to Cart
                             </button>
-                            <button 
-                                className="add-to-cart-btn" 
-                                onClick={() => (item)}
-                            >
-                                OverView
-                            </button>
+                            <Link to={`/overview/${item.id}`}>
+                                <button className="add-to-cart-btn">
+                                    Overview
+                                </button>
+                                </Link>
                         </div>
                     ))
                 )}

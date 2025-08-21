@@ -1,16 +1,13 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { products } from '../data/ProductData';
-import '../styles/ProductDetails.css'
+import { useParams } from "react-router-dom";
+import { products } from "../data/ProductData";
+import "../styles/ProductDetails.css";
 
-
-function ProductDetails({ addToCart }) {
+const ProductDetail = ({ onAddToCart }) => {
     const { id } = useParams();
-    const product = products.find((p) => p.id === parseInt(id));
+    const product = products.find(p => p.id === parseInt(id));
 
-    if (!product) {
-        return <h2>Product not found</h2>;
-    }
+    if (!product) return <h2 className="not-found">Product not found</h2>;
+
     const handleAddToCart = (item) => {
         const userId = localStorage.getItem('user_id') || 'guest';  
         const cartKey = `cart_${userId}`;
@@ -24,31 +21,24 @@ function ProductDetails({ addToCart }) {
         }
 
         localStorage.setItem(cartKey, JSON.stringify(cart));
-
         window.dispatchEvent(new Event("cartUpdated"));
     };
     return (
-        <div className="product-details">
-            <img src={product.image} alt={product.name} className="product-details-image" />
-            <div className="product-details-info">
+        <div className="product-detail">
+            <img src={product.image} alt={product.name} />
+            <div className="product-info">
                 <h2>{product.name}</h2>
                 <p className="price">${product.price.toFixed(2)}</p>
+                <p className="description">{product.info}</p>
                 <button 
                     className="add-to-cart-btn" 
                     onClick={() => handleAddToCart(product)}
                 >
                     Add to Cart
                 </button>
-                <button 
-                    className="add-to-cart-btn" 
-                    onClick={() => handleAddToCart(product)}
-                >
-                    OverView
-                </button>
-                <p>{product.info}</p>
             </div>
         </div>
     );
-}
+};
 
-export default ProductDetails;
+export default ProductDetail;

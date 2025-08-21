@@ -1,155 +1,142 @@
 .product-main {
-    width: 90%;
     max-width: 1200px;
-    margin: 2rem auto;
-    font-family: 'Poppins', sans-serif;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: Arial, sans-serif;
+}
+
+.product-main h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
     color: #333;
 }
 
 .input-container {
     display: flex;
     align-items: center;
-    background: #f4f4f4;
-    border-radius: 50px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     padding: 0.5rem 1rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 1rem auto;
+    background: #fff;
+    position: relative;
 }
 
 .input-bar {
     flex: 1;
     border: none;
     outline: none;
-    padding: 0.6rem;
+    padding: 0.5rem;
     font-size: 1rem;
-    background: transparent;
 }
 
-.search-icon {
-    margin-right: 0.6rem;
-    color: #666;
+.search-icon,
+.cross-icon {
+    color: #888;
+    cursor: pointer;
 }
 
 .cross-icon {
-    cursor: pointer;
-    color: #999;
-    transition: color 0.2s ease;
+    margin-left: 0.5rem;
 }
-.cross-icon:hover {
-    color: #e63946;
+
+.sort-options {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 1.5rem 0;
+    gap: 0.5rem;
+}
+
+.sort-options p {
+    margin: 0;
+    font-weight: 500;
+}
+
+.filter-option select {
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background: #fff;
+    cursor: pointer;
 }
 
 .line {
     border: none;
-    border-bottom: 1px solid #ddd;
+    height: 1px;
+    background: #ddd;
+    margin: 1rem 0;
 }
 
 .product-heading {
     font-size: 1.5rem;
-    font-weight: 600;
     margin-bottom: 1rem;
     text-align: left;
+    color: #444;
 }
 
 .products {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
 }
 
-.product-card-link {
-    text-decoration: none;
-    color: inherit;
-}
-
 .product-card {
-    background: #fff;
-    border-radius: 12px;
+    border: 1px solid #eee;
+    border-radius: 10px;
     padding: 1rem;
     text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: #fff;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .product-card img {
     width: 100%;
     height: 180px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 0.8rem;
+    object-fit: contain;
+    margin-bottom: 1rem;
 }
 
 .product-card h3 {
     font-size: 1.1rem;
     margin: 0.5rem 0;
-    font-weight: 500;
+    color: #222;
 }
 
 .product-card h4 {
     font-size: 1rem;
-    font-weight: 600;
-    color:#011361;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.add-to-cart-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin: 0.3rem;
+    transition: 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background: #1e40af;
 }
 
 .no-results {
     text-align: center;
     font-size: 1.1rem;
-    color: #777;
+    color: #888;
     margin-top: 2rem;
 }
-.add-to-cart-btn {
-    background: #011361;
-    color: #fff;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-top: 10px;
-    transition: 0.3s ease;
-}
-
-.add-to-cart-btn:hover {
-    background: #21867a;
-    transform: translateY(-2px);
-}
-
-.sort-options {
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
-    gap: 10px; 
-    margin: 20px 0;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.sort-options p {
-    margin: 0;
-    color: #333;
-}
-
-.sort-customize-group select {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    font-size: 15px;
-    cursor: pointer;
-    outline: none;
-    transition: 0.3s ease;
-}
-
-.sort-customize-group select:hover,
-.sort-customize-group select:focus {
-    border-color: #4CAF50;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-}
-
-
