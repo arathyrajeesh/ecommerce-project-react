@@ -91,7 +91,6 @@ const Cart = () => {
                 </>
             )}
 
-            {/* Popup Message */}
             {showMessage && (
                 <div className="checkout-message">
                     <div className="message-box">
