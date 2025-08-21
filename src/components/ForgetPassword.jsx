@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import '../styles/Forget.css';
 
-import '../styles/Login.css';
+
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
