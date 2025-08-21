@@ -94,22 +94,13 @@
     background-color: #ff4d4f;
 }
 
-.new-arrival {
+/* .new-arrival {
     background-color: #52c41a;
-}
+} */
 
-.add-to-cart-btn {
-    background-color: rgb(185, 18, 18);
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 14px;
-    width: 100%;
-}
 
 .shop-all-btn {
-    background-color:rgb(185, 18, 18) ;
+    background-color:#041e55 ;
     color: white;
     border: none;
     padding: 15px 30px;
