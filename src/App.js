@@ -8,6 +8,7 @@ import Spinner from "./components/Spinner";
 import ErrorBoundary from './components/ErrorBoundary';
 import ListingPage from "./components/ListingPage";
 import ProductOverviewModal from "./components/Overview";
+import ProductView from "./components/ProductDetails";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -31,7 +32,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            
+
             <Route element={<ProtectedRoutes />}>
               <Route path="/" element={<Homepage />} />
               <Route path="/shop" element={<ListingPage />} />
@@ -39,7 +40,7 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/products/:id" element={<ProductDetails />} />
+              <Route path="/products/:id" element={<ProductView />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/user" element={<UserProfile />} />
               <Route path="/cart" element={<Cart />} />

@@ -10,11 +10,6 @@
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease-in-out;
-}
-
-.product-detail:hover {
-    transform: translateY(-4px);
 }
 
 .product-detail img {
@@ -54,7 +49,7 @@
     max-width: 600px;
 }
 .add-to-cart-btn {
-    background-color: #28a745;
+    background-color: #041e55;
     color: white;
     padding: 10px 16px;
     border: none;
@@ -66,7 +61,7 @@
 }
 
 .add-to-cart-btn:hover {
-    background-color: #218838;
+    background-color:  #1e40af;
 }
 
 @media (max-width: 768px) {

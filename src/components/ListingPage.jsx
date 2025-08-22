@@ -3,6 +3,7 @@ import '../styles/Search.css';
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { products } from '../data/ProductData';
 import ProductOverviewModal from './Overview';
+import { useNavigate } from 'react-router-dom';
 
 const options = [
     { value: 'all', label: 'All' },
@@ -12,7 +13,7 @@ const options = [
     { value: 'hightolow', label: 'Price: High to Low' },
 ];
 
-const ListingPage = () => {
+const ListingPage = ({ data }) => {
     const [query, setQuery] = useState('');
     const [sortType, setSortType] = useState('all');
     const [dataList, setDataList] = useState(products);
@@ -61,6 +62,11 @@ const ListingPage = () => {
         localStorage.setItem(cartKey, JSON.stringify(cart));
         window.dispatchEvent(new Event("cartUpdated"));
     };
+    const navigate = useNavigate();
+    const handleImageClick = (id) => {
+        navigate(`/products/${id}`);
+    };
+    
 
     return (
         <div className="product-main">
@@ -98,7 +104,13 @@ const ListingPage = () => {
                 ) : (
                     dataList.map((item) => (
                         <div key={item.id} className="product-card">
-                            <img src={item.image} alt={item.name} style={{ cursor: 'pointer' }} />
+                            <img 
+                            src={item.image} 
+                            alt={item.name} 
+                            style={{ cursor: 'pointer' }} 
+                            onClick={() => handleImageClick(item.id)} 
+                            />
+
                             <h3>{item.name}</h3>
                             <h4>${item.price.toFixed(2)}</h4>
 
