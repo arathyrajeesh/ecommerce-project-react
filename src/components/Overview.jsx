@@ -1,31 +1,72 @@
-import { useParams } from "react-router-dom";
-import { products } from "../data/ProductData";
-import "../styles/Overview.css";
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { products } from '../data/ProductData';
+import '../styles/Overview.css';
 
-const OverviewPage = () => {
+const ProductOverviewModal = ({ product: propProduct, onClose, onAddToCart }) => {
     const { id } = useParams();
-    const product = products.find(p => p.id === parseInt(id));
+    const navigate = useNavigate();
+    
+    const product = propProduct || products.find(p => p.id === parseInt(id));
 
-    if (!product) return <h2 className="not-found">Product not found</h2>;
+    const [color, setColor] = useState(product?.colorOptions[0] || '');
+    const [temperature, setTemperature] = useState(product?.temperatureOptions[0] || '');
+    const [quantity, setQuantity] = useState(1);
+
+    if (!product) return <h2>Product not found</h2>;
+
+    const handleAdd = () => {
+        if (onAddToCart) onAddToCart({ ...product, color, temperature, quantity });
+        navigate(-1); 
+    };
 
     return (
-        <div className="overview-container">
-        <div className="overview-card">
-            <div className="overview-image">
-            <img src={product.image} alt={product.name} />
+        <div className="modal-overlay">
+            <div className="overview-card">
+                <button className="close-btn" onClick={() => navigate(-1)}>✖</button>
+                <div className="overview-image">
+                    <img src={product.image} alt={product.name} />
+                </div>
+                <div className="overview-details">
+                    <h2>{product.name}</h2>
+                    <h3>${product.price.toFixed(2)}</h3>
+                    <p>SKU: {product.sku}</p>
+                    <div className="option-group">
+                        <label>Color:</label>
+                        <div className="colors">
+                            {product.colorOptions.map((c, idx) => (
+                                <span
+                                    key={idx}
+                                    className={`color-circle ${c === color ? 'selected' : ''}`}
+                                    style={{ backgroundColor: c }}
+                                    onClick={() => setColor(c)}
+                                ></span>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="option-group">
+                        <label>Temperature:</label>
+                        <select value={temperature} onChange={(e) => setTemperature(e.target.value)}>
+                            {product.temperatureOptions.map((t, idx) => (
+                                <option key={idx} value={t}>{t}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="option-group">
+                        <label>Quantity:</label>
+                        <div className="quantity-selector">
+                            <button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
+                            <span>{quantity}</span>
+                            <button onClick={() => setQuantity(q => q + 1)}>+</button>
+                        </div>
+                    </div>
+                    <button className="add-cart-btn" onClick={handleAdd}>
+                        Add to Cart
+                    </button>
+                </div>
             </div>
-            <div className="overview-details">
-            <h1>{product.name}</h1>
-            <h2>${product.price.toFixed(2)}</h2>
-            <p className="overview-description">
-                {product.info}
-            </p>
-
-            <button className="overview-btn">Add to Cart</button>
-            </div>
-        </div>
         </div>
     );
 };
 
-export default OverviewPage;
+export default ProductOverviewModal;

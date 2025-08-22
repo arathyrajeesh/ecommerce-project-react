@@ -24,7 +24,7 @@ class ErrorBoundary extends React.Component {
         console.log("Error Found");
 
         return this.state.error ? (
-        <h1> Something Went Wrong ... Error Boundary Caught it!</h1>
+        <h1> Something Went Wrong ... Please Try Again Later</h1>
         ) : (
         <>
             {this.props.children}

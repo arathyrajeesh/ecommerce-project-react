@@ -6,8 +6,8 @@ import ProtectedRoutes from "./hooks/useProtectedRoutes";
 import "./App.css";
 import Spinner from "./components/Spinner";
 import ErrorBoundary from './components/ErrorBoundary';
-import ProductOverviewModal from "./components/Overview";
 import ListingPage from "./components/ListingPage";
+import ProductOverviewModal from "./components/Overview";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -31,11 +31,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-
+            
             <Route element={<ProtectedRoutes />}>
               <Route path="/" element={<Homepage />} />
               <Route path="/shop" element={<ListingPage />} />
-              <Route path="/test-list" element={<ListingPage/>}/>
+              <Route path="/test-list" element={<ListingPage />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
