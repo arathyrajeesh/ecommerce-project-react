@@ -17,7 +17,6 @@ const ListingPage = ({ data }) => {
     const [query, setQuery] = useState('');
     const [sortType, setSortType] = useState('all');
     const [dataList, setDataList] = useState(products);
-    const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
         let filtered = [...products]; 
@@ -66,8 +65,10 @@ const ListingPage = ({ data }) => {
     const handleImageClick = (id) => {
         navigate(`/products/${id}`);
     };
-    
-
+    const setSelectedProduct = (id) => {
+        navigate(`/overview/${id}`);
+        console.log(id);
+    };
     return (
         <div className="product-main">
             <h1>Shop</h1>
@@ -117,21 +118,13 @@ const ListingPage = ({ data }) => {
                             <button className="add-to-cart-btn" onClick={() => handleAddToCart({ ...item, quantity: 1 })}>
                                 Add to Cart
                             </button>
-                            <button className="add-to-cart-btn" onClick={() => setSelectedProduct(item)}>
+                            {/* <button className="add-to-cart-btn" onClick={() => setSelectedProduct(item.id)}>
                                 Overview
-                            </button>
+                            </button> */}
                         </div>
                     ))
                 )}
             </div>
-
-            {selectedProduct && (
-                <ProductOverviewModal
-                    product={selectedProduct}
-                    onClose={() => setSelectedProduct(null)}
-                    onAddToCart={handleAddToCart}
-                />
-            )}
         </div>
     );
 };

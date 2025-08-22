@@ -61,7 +61,7 @@ const Cart = () => {
             {cartItems.length === 0 ? (
                 <div className="empty-cart-message">
                     <p>Your cart is empty.</p>
-                    <Link to="/shop"><button className="continue-shopping-btn">Continue Shopping</button></Link>
+                    <Link to="/shop"><button className="continue-shopping">Continue Shopping</button></Link>
                 </div>
             ) : (
                 <>

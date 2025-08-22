@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 function Hero() {
-    const { user } = useContext(AuthContext); // get user from context
+    const { user } = useContext(AuthContext); 
 
     return (
         <main className="hero-section">

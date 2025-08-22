@@ -27,7 +27,7 @@ function App() {
     <>
       <Header />
       <Suspense fallback={<Spinner />}>
-        <ErrorBoundary fallback={<div>Something went wrong</div>}>
+        <ErrorBoundary>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
