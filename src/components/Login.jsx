@@ -20,86 +20,86 @@ const LoginPage = () => {
         setLoading(true);
 
         try {
-        const res = await axios.post(
-            'https://ecommerce-project-backend-nodejs.onrender.com/api/auth/login',
-            userData
-        );
+            const res = await axios.post(
+                'https://ecommerce-project-backend-nodejs.onrender.com/api/auth/login',
+                userData
+            );
 
-        const token = res.data.token;
-        const userId = res.data.data.id;
+            const token = res.data.token;
+            const userId = res.data.data.id;
 
-        if (token && userId) {
-            localStorage.setItem('access_token', token);
-            localStorage.setItem('user_id', userId);
+            if (token && userId) {
+                localStorage.setItem('access_token', token);
+                localStorage.setItem('user_id', userId);
 
-            if (!localStorage.getItem(`cart_${userId}`)) {
-            localStorage.setItem(`cart_${userId}`, JSON.stringify([]));
+                if (!localStorage.getItem(`cart_${userId}`)) {
+                    localStorage.setItem(`cart_${userId}`, JSON.stringify([]));
+                }
+
+                toast.success('Login Successful');
+                navigate('/');
+            } else {
+                toast.error('Authentication failed. Please try again.');
             }
-
-            toast.success('Login Successful');
-            navigate('/');
-        } else {
-            toast.error('Authentication failed. Please try again.');
-        }
         } catch (error) {
-        const errorMessage =
-            error.response?.data?.message ||
-            'Login failed. Please check your credentials.';
-        toast.error(errorMessage);
+            const errorMessage =
+                error.response?.data?.message ||
+                'Login failed. Please check your credentials.';
+            toast.error(errorMessage);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     };
 
     return (
-        <div className="auth-container">
-        <form className="auth-form" onSubmit={handleSubmit}>
-            <h2>Log In</h2>
+        <div className="login-container">
+            <form className="login-form" onSubmit={handleSubmit}>
+                <h2 className="login-title">Log In</h2>
 
-            <div className="form-group">
-            <label>Email</label>
-            <input
-                type="email"
-                name="email"
-                value={userData.email}
-                onChange={handleInputChange}
-                placeholder="Enter your email"
-                required
-            />
-            </div>
+                <div className="login-group">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={userData.email}
+                        onChange={handleInputChange}
+                        placeholder="Enter your email"
+                        required
+                    />
+                </div>
 
-            <div className="form-group">
-            <label>Password</label>
-            <div className="password-input-container">
-                <input
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                value={userData.password}
-                onChange={handleInputChange}
-                placeholder="Enter your password"
-                required
-                />
-                <button
-                type="button"
-                className="show-password-button"
-                onClick={() => setShowPassword(!showPassword)}
-                >
-                {showPassword ? 'Hide' : 'Show'}
+                <div className="login-group">
+                    <label>Password</label>
+                    <div className="login-password-container">
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            name="password"
+                            value={userData.password}
+                            onChange={handleInputChange}
+                            placeholder="Enter your password"
+                            required
+                        />
+                        <button
+                            type="button"
+                            className="login-show-password"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? 'Hide' : 'Show'}
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" className="login-button" disabled={loading}>
+                    {loading ? 'Logging in...' : 'Log In'}
                 </button>
-            </div>
-            </div>
 
-            <button type="submit" className="auth-button" disabled={loading}>
-            {loading ? 'Logging in...' : 'Log In'}
-            </button>
-
-            <p>
-            <Link to="/forgot-password">Forgot password?</Link>
-            </p>
-            <p>
-            Don't have an account? <Link to="/register">Register here!</Link>
-            </p>
-        </form>
+                <p className="login-extra">
+                    <Link to="/forgot-password">Forgot password?</Link>
+                </p>
+                <p className="login-extra">
+                    Don't have an account? <Link to="/register">Register here!</Link>
+                </p>
+            </form>
         </div>
     );
 };

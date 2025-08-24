@@ -46,50 +46,62 @@ const Register = () => {
     };
 
     return (
-        <div className="auth-container">
-            <form className="form" onSubmit={handleSubmit}>
+        <div className="register-container">
+            <form className="register-form" onSubmit={handleSubmit}>
                 <h2>Create an Account</h2>
-                <div className="form-group">
+                
+                <div className="register-group">
                     <label>Name</label>
                     <input 
-                    type="text" 
-                    name="name" 
-                    value={userData.name}
-                    placeholder='Enter your Name' 
-                    onChange={handleInputChange} 
+                        type="text" 
+                        name="name" 
+                        value={userData.name}
+                        placeholder="Enter your Name" 
+                        onChange={handleInputChange} 
+                        required
                     />
                 </div>
-                <div className="form-group">
+
+                <div className="register-group">
                     <label>Email</label>
                     <input 
-                    type="email" 
-                    name="email" 
-                    value={userData.email} 
-                    placeholder='Enter your email'
-                    onChange={handleInputChange} 
+                        type="email" 
+                        name="email" 
+                        value={userData.email} 
+                        placeholder="Enter your Email"
+                        onChange={handleInputChange} 
+                        required
                     />
                 </div>
-                <div className="form-group">
+
+                <div className="register-group">
                     <label>Password</label>
-                    <input 
-                    type={showPassword ? 'text' : 'password'} 
-                    name="password" 
-                    value={userData.password} 
-                    placeholder="Enter your password"
-                    onChange={handleInputChange} 
-                    />
-                    <button
-                    type="button"
-                    className="show-password-button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    >
-                    {showPassword ? 'Hide' : 'Show'}
-                    </button>
+                    <div className="register-password-container">
+                        <input 
+                            type={showPassword ? 'text' : 'password'} 
+                            name="password" 
+                            value={userData.password} 
+                            placeholder="Enter your Password"
+                            onChange={handleInputChange} 
+                            required
+                        />
+                        <button
+                            type="button"
+                            className="register-show-password"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? 'Hide' : 'Show'}
+                        </button>
+                    </div>
                 </div>
-                <button type="submit" className="auth-button" disabled={loading}>
+
+                <button type="submit" className="register-button" disabled={loading}>
                     {loading ? 'Loading...' : 'Register'}
                 </button>
-                <p>Already have an account? <Link to="/login">Log In</Link></p>
+
+                <p className="register-footer">
+                    Already have an account? <Link to="/login">Log In</Link>
+                </p>
             </form>
         </div>
     );
