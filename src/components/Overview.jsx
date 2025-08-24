@@ -9,7 +9,6 @@ const ProductOverviewModal = ({ product: propProduct, onAddToCart }) => {
     
     const product = propProduct || products.find(p => p.id === parseInt(id));
 
-    // ✅ Safe initialization with optional chaining
     const [color, setColor] = useState(product?.colorOptions?.[0] || '');
     const [temperature, setTemperature] = useState(product?.temperatureOptions?.[0] || '');
     const [quantity, setQuantity] = useState(1);
