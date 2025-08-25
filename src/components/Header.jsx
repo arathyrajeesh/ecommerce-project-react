@@ -3,7 +3,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import '../styles/header.css';
 import { VscAccount } from "react-icons/vsc";
-import { CiSearch } from "react-icons/ci";
 
 function Header() {
     const bannerMessages = ["15% OFF ALL TENTS", "WE SHIP WORLDWIDE"];
