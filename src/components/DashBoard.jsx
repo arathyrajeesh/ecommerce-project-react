@@ -26,19 +26,21 @@ import CategoryIcon from '@mui/icons-material/Category';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PaymentIcon from '@mui/icons-material/Payment';
 
-
 const drawerWidth = 200;
+
 const items = [
   { text: "Orders", icon: <CategoryIcon /> },
   { text: "Products", icon: <ShoppingCartIcon /> },
   { text: "Customers", icon: <PeopleIcon /> },
   { text: "Collections", icon: <CollectionsIcon /> },
 ];
+
 const listItems = [
   { text: 'Analytics', icon: <TrendingUpIcon /> },
   { text: "Settings", icon: <SettingsIcon />},
   { text: "Return/Refunds", icon: <PaymentIcon/>},
-]
+];
+
 export default function DashboardWithSideDrawer() {
   const [open, setOpen] = React.useState(true); 
   const toggleDrawer = () => {
@@ -46,28 +48,28 @@ export default function DashboardWithSideDrawer() {
   };
 
   const drawerContent = (
-    <Box sx={{ width: drawerWidth }}>
-      <Typography variant="h6" component="h6" sx={{ textAlign: 'center', py: 2 }}>
+    <Box sx={{ width: drawerWidth, color: 'white' }}>
+      <Typography variant="h6" component="h6" sx={{ textAlign: 'center', py: 2, color: 'white' }}>
         MADAGASCAR
       </Typography>
-      <Divider />
+      <Divider sx={{ bgcolor: "grey.700" }} />
       <List>
         {items.map((item) => (
           <ListItem key={item.text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemButton sx={{ color: 'white', '&:hover': { bgcolor: 'grey.800' } }}>
+              <ListItemIcon sx={{ color: 'white' }}>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <Divider />
+      <Divider sx={{ bgcolor: "grey.700" }} />
       <List>
-        {listItems.map((listItems) => (
-          <ListItem key={listItems.text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{listItems.icon}</ListItemIcon>
-              <ListItemText primary={listItems.text} />
+        {listItems.map((listItem) => (
+          <ListItem key={listItem.text} disablePadding>
+            <ListItemButton sx={{ color: 'white', '&:hover': { bgcolor: 'grey.800' } }}>
+              <ListItemIcon sx={{ color: 'white' }}>{listItem.icon}</ListItemIcon>
+              <ListItemText primary={listItem.text} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -95,7 +97,19 @@ export default function DashboardWithSideDrawer() {
         </Toolbar>
       </AppBar>
 
-      <Drawer variant="persistent" anchor="left" open={open}>
+      <Drawer
+        variant="persistent"
+        anchor="left"
+        open={open}
+        sx={{
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+            bgcolor: 'black',
+            color: 'white',
+          },
+        }}
+      >
         {drawerContent}
       </Drawer>
 
