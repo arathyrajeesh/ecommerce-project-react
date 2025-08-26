@@ -1,6 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
-import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -11,51 +9,33 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchUserProfile = async () => {
-            const accessToken = localStorage.getItem('access_token');
-            if (!accessToken) {
-                setLoading(false);
-                return;
-            }
+        const storedUser = localStorage.getItem("loggedInUser");
+        if (storedUser) {
+        setUser(JSON.parse(storedUser));
+        }
+        setLoading(false);
+    }, []);
 
-            try {
-                const response = await axios.get(
-                    'https://ecommerce-project-backend-nodejs.onrender.com/api/auth/me',
-                    {
-                        headers: { Authorization: `Bearer ${accessToken}` },
-                    }
-                );
-                setUser(response.data.data);
-                console.log("User profile fetched successfully");
-            } catch (err) {
-                console.error("Error fetching user profile:", err);
-                localStorage.removeItem('access_token');
-                setUser(null);
-                navigate('/login'); 
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchUserProfile();
-    }, [navigate]);
-
-    const login = (token, userData) => {
-        localStorage.setItem('access_token', token);
+    const login = (userData) => {
+        localStorage.setItem("loggedInUser", JSON.stringify(userData));
         setUser(userData);
-        toast.success('Logged in successfully!');
-        navigate('/home');
+
+        if (userData.role === "admin") {
+        navigate("/admin/dashboard");
+        } else {
+        navigate("/home");
+        }
     };
 
     const logout = () => {
-        localStorage.removeItem('access_token');
+        localStorage.removeItem("loggedInUser");
         setUser(null);
-        toast.success('Logged out successfully!');
-        navigate('/login');
+        navigate("/login");
     };
 
     return (
         <AuthContext.Provider value={{ user, loading, login, logout }}>
-            {children}
+        {children}
         </AuthContext.Provider>
     );
 };

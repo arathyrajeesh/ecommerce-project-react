@@ -1,97 +1,140 @@
 import * as React from 'react';
+import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import Drawer from '@mui/material/Drawer';
-import AppBar from '@mui/material/AppBar';
+import MuiDrawer from '@mui/material/Drawer';
+import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
+import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PeopleIcon from '@mui/icons-material/People';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import CategoryIcon from '@mui/icons-material/Category';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PaymentIcon from '@mui/icons-material/Payment';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
-const drawerWidth = 200;
+const drawerWidth = 240;
+
+const openedMixin = (theme) => ({
+  width: drawerWidth,
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: 'hidden',
+});
+
+const closedMixin = (theme) => ({
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: 'hidden',
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up('sm')]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+});
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+}));
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(['width', 'margin'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: 'nowrap',
+  boxSizing: 'border-box',
+  ...(open && {
+    ...openedMixin(theme),
+    '& .MuiDrawer-paper': openedMixin(theme),
+  }),
+  ...(!open && {
+    ...closedMixin(theme),
+    '& .MuiDrawer-paper': closedMixin(theme),
+  }),
+}));
 
 const items = [
-  { text: "Orders", icon: <CategoryIcon /> },
-  { text: "Products", icon: <ShoppingCartIcon /> },
-  { text: "Customers", icon: <PeopleIcon /> },
-  { text: "Collections", icon: <CollectionsIcon /> },
+  { text: 'Orders', icon: <CategoryIcon /> },
+  { text: 'Products', icon: <ShoppingCartIcon /> },
+  { text: 'Customers', icon: <PeopleIcon /> },
+  { text: 'Collections', icon: <CollectionsIcon /> },
 ];
 
 const listItems = [
   { text: 'Analytics', icon: <TrendingUpIcon /> },
-  { text: "Settings", icon: <SettingsIcon /> },
-  { text: "Return/Refunds", icon: <PaymentIcon /> },
+  { text: 'Settings', icon: <SettingsIcon /> },
+  { text: 'Return/Refunds', icon: <PaymentIcon /> },
 ];
 
-export default function DashboardWithSideDrawer() {
-  const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
+export default function Dashboard() {
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
   };
 
-  const drawerContent = (
-    <Box sx={{ width: drawerWidth, color: 'white' }}>
-      <Typography
-        variant="h6"
-        component="h6"
-        sx={{ textAlign: 'center', py: 2, color: 'white' }}
-      >
-        MADAGASCAR
-      </Typography>
-      <Divider sx={{ bgcolor: "grey.700" }} />
-      <List>
-        {items.map((item) => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton sx={{ color: 'white', '&:hover': { bgcolor: 'grey.800' } }}>
-              <ListItemIcon sx={{ color: 'white' }}>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider sx={{ bgcolor: "grey.700" }} />
-      <List>
-        {listItems.map((listItem) => (
-          <ListItem key={listItem.text} disablePadding>
-            <ListItemButton sx={{ color: 'white', '&:hover': { bgcolor: 'grey.800' } }}>
-              <ListItemIcon sx={{ color: 'white' }}>{listItem.icon}</ListItemIcon>
-              <ListItemText primary={listItem.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar
-        position="fixed"
-        sx={{
-          width: open ? `calc(100% - ${drawerWidth}px)` : '100%',
-          ml: open ? `${drawerWidth}px` : 0,
-          transition: 'all 0.3s ease',
-        }}
-      >
+      <CssBaseline />
+      <AppBar position="fixed" open={open}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" onClick={toggleDrawer} sx={{ mr: 2 }}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: 'none' }),
+            }}
+          >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
@@ -100,37 +143,53 @@ export default function DashboardWithSideDrawer() {
         </Toolbar>
       </AppBar>
 
-      <Drawer
-        variant="persistent"
-        anchor="left"
-        open={open}
-        sx={{
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            bgcolor: "#2980b9",
-            color: 'white',
-          },
-        }}
-      >
-        {drawerContent}
+      <Drawer variant="permanent" open={open}>
+        <DrawerHeader>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            MADAGASCAR
+          </Typography>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </DrawerHeader>
+
+        <Divider />
+
+        <List>
+          {items.map((item) => (
+            <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
       </Drawer>
 
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          ml: open ? `${drawerWidth}px` : 0,
-          transition: 'all 0.3s ease',
-        }}
-      >
-        <Toolbar />
-
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader /> 
         <Grid container spacing={3}>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={8}>   
             <Card sx={{ minHeight: 150, boxShadow: 3 }}>
               <CardContent>
-                <Typography variant="h6" gutterBottom>Total Orders</Typography>
+                <Typography variant="h6" gutterBottom>
+                  Total Orders
+                </Typography>
                 <Typography variant="h4" color="primary">
                   1,245
                 </Typography>
@@ -141,10 +200,12 @@ export default function DashboardWithSideDrawer() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={4}>   
             <Card sx={{ minHeight: 150, boxShadow: 3 }}>
               <CardContent>
-                <Typography variant="h6" gutterBottom>Total Products</Typography>
+                <Typography variant="h6" gutterBottom>
+                  Total Products
+                </Typography>
                 <Typography variant="h4" color="secondary">
                   356
                 </Typography>
@@ -155,10 +216,12 @@ export default function DashboardWithSideDrawer() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={12}>   
             <Card sx={{ minHeight: 150, boxShadow: 3 }}>
               <CardContent>
-                <Typography variant="h6" gutterBottom>Customers</Typography>
+                <Typography variant="h6" gutterBottom>
+                  Customers
+                </Typography>
                 <Typography variant="h4" color="success.main">
                   890
                 </Typography>

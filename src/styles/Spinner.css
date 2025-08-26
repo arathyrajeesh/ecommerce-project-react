@@ -2,20 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
-    background: rgba(255, 255, 255, 0.8);
+    height: 100vh;
 }
 
 .spinner {
     width: 60px;
     height: 60px;
-    border: 6px solid #ddd;
-    border-top: 6px solid #4caf50;
+    border: 6px solid #e0e0e0;
+    border-top: 6px solid #1976d2;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
