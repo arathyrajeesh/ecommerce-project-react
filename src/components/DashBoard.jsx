@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -37,19 +36,23 @@ const items = [
 
 const listItems = [
   { text: 'Analytics', icon: <TrendingUpIcon /> },
-  { text: "Settings", icon: <SettingsIcon />},
-  { text: "Return/Refunds", icon: <PaymentIcon/>},
+  { text: "Settings", icon: <SettingsIcon /> },
+  { text: "Return/Refunds", icon: <PaymentIcon /> },
 ];
 
 export default function DashboardWithSideDrawer() {
-  const [open, setOpen] = React.useState(true); 
+  const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   const drawerContent = (
     <Box sx={{ width: drawerWidth, color: 'white' }}>
-      <Typography variant="h6" component="h6" sx={{ textAlign: 'center', py: 2, color: 'white' }}>
+      <Typography
+        variant="h6"
+        component="h6"
+        sx={{ textAlign: 'center', py: 2, color: 'white' }}
+      >
         MADAGASCAR
       </Typography>
       <Divider sx={{ bgcolor: "grey.700" }} />
@@ -103,9 +106,8 @@ export default function DashboardWithSideDrawer() {
         open={open}
         sx={{
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
             boxSizing: 'border-box',
-            bgcolor: 'black',
+            bgcolor: "#2980b9",
             color: 'white',
           },
         }}
@@ -123,6 +125,7 @@ export default function DashboardWithSideDrawer() {
         }}
       >
         <Toolbar />
+
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
             <Card sx={{ minHeight: 150, boxShadow: 3 }}>
@@ -152,7 +155,7 @@ export default function DashboardWithSideDrawer() {
             </Card>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={4}>
             <Card sx={{ minHeight: 150, boxShadow: 3 }}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>Customers</Typography>
