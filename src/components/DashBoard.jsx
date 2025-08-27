@@ -27,7 +27,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ChartBar from './ChartBar';
 import Donut from '../components/DonutGraph'
-
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -72,15 +72,15 @@ const AppBar = styled(MuiAppBar, {
         marginLeft: drawerWidth,
         width: `calc(100% - ${drawerWidth}px)`,
         transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
         }),
     }),
 }));
 
 const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== 'open',
-    })(({ theme, open }) => ({
+})(({ theme, open }) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
@@ -102,10 +102,10 @@ const items = [
     { text: 'Collections', icon: <CollectionsIcon /> },
 ];
 
-
 export default function Dashboard() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate();
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -115,125 +115,138 @@ export default function Dashboard() {
         setOpen(false);
     };
 
-return (
-<Box sx={{ display: 'flex' }}>
-    <CssBaseline />
-    <AppBar position="fixed" open={open}>
-        <Toolbar>
-            <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-            marginRight: 5,
-            ...(open && { display: 'none' }),
-            }}
-            >
-                <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-            Dashboard
-            </Typography>
-        </Toolbar>
-    </AppBar>
-    <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-            MADAGASCAR
-            </Typography>
-            <IconButton onClick={handleDrawerClose}>
-                {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-            {items.map((item) => (
-                <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-                    <ListItemButton
-                    sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                    }}
-                    >
-                        <ListItemIcon
-                        sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : 'auto',
-                        justifyContent: 'center',
-                    }}
-                    >
-                        {item.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                    </ListItemButton>
-                </ListItem>
-            ))}
-        </List>
-    </Drawer>
-    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader /> 
-        <Grid container spacing={1}>
-            <Grid item xs={2} md={4} size={4}>
-                <Card sx={{minHeight: 100,boxShadow: 3 }}>
-                    <CardContent>
-                        <Typography variant="h6" gutterBottom> Orders</Typography>
-                        <Typography variant="h4" sx={{ color: 'primary.main' }}>
-                        245
+    // 🔴 Logout function
+    const logout = () => {
+        localStorage.removeItem("loggedInUser");
+        navigate("/admin/login"); // redirect admin to login page
+    };
+
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            <AppBar position="fixed" open={open}>
+                <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            sx={{
+                                marginRight: 5,
+                                ...(open && { display: 'none' }),
+                            }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" noWrap component="div">
+                            Dashboard
                         </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small">View Orders</Button>
-                    </CardActions>
-                </Card>
-            </Grid>
-            <Grid item xs={3} md={4} size={4}>
-                <Card sx={{ minHeight: 100,boxShadow: 3 }}>
-                    <CardContent>
-                        <Typography variant="h6" gutterBottom> Products</Typography>
-                        <Typography variant="h4" sx={{ color: 'primary.main' }}>
-                        245
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small">View Orders</Button>
-                    </CardActions>
-                </Card>
-            </Grid>
-            <Grid item xs={3} md={4} size={4}>
-                <Card sx={{minHeight: 100, boxShadow: 3 }}>
-                    <CardContent>
-                        <Typography variant="h6" gutterBottom>Payments</Typography>
-                        <Typography variant="h4" sx={{ color: 'primary.main' }}>
-                        1,245
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small">View Orders</Button>
-                    </CardActions>
-                </Card>
-            </Grid>
-            <Grid item xs={2} md={4} size={6}>
-                <Card sx={{ minHeight: 150, boxShadow: 3 }}>
-                    <CardContent>
-                        <Typography variant="h5" sx={{ color: 'black' }}>Profit</Typography>
-                        <Typography variant="p" sx={{ color: 'grey' }}>Last Month</Typography>
-                        <ChartBar/>
-                    </CardContent>
-                </Card>
-            </Grid>
-            <Grid item xs={2} md={4} size={6}>
-                <Card sx={{ minHeight: 10, boxShadow: 3 }}>
-                    <CardContent>
-                        <Typography variant="h5" sx={{ color: 'black' }}>Report</Typography>
-                        <Typography variant="p" sx={{ color: 'grey' }}>Monthly Report</Typography>
-                        <Donut/>
-                    </CardContent>
-                </Card>
-            </Grid>
-        </Grid>
-    </Box>
-</Box>
-);
+                    </Box>
+                    
+                    {/* 🔴 Logout Button on right */}
+                    <Button color="inherit" onClick={logout}>
+                        Logout
+                    </Button>
+                </Toolbar>
+            </AppBar>
+            <Drawer variant="permanent" open={open}>
+                <DrawerHeader>
+                    <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                        MADAGASCAR
+                    </Typography>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                    </IconButton>
+                </DrawerHeader>
+                <Divider />
+                <List>
+                    {items.map((item) => (
+                        <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    {item.icon}
+                                </ListItemIcon>
+                                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Drawer>
+            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                <DrawerHeader /> 
+                <Grid container spacing={1}>
+                    <Grid item xs={2} md={4} size={4}>
+                        <Card sx={{minHeight: 100,boxShadow: 3 }}>
+                            <CardContent>
+                                <Typography variant="h6" gutterBottom> Orders</Typography>
+                                <Typography variant="h4" sx={{ color: 'primary.main' }}>
+                                    245
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">View Orders</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={3} md={4} size={4}>
+                        <Card sx={{ minHeight: 100,boxShadow: 3 }}>
+                            <CardContent>
+                                <Typography variant="h6" gutterBottom> Products</Typography>
+                                <Typography variant="h4" sx={{ color: 'primary.main' }}>
+                                    245
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">View Orders</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={3} md={4} size={4}>
+                        <Card sx={{minHeight: 100, boxShadow: 3 }}>
+                            <CardContent>
+                                <Typography variant="h6" gutterBottom>Payments</Typography>
+                                <Typography variant="h4" sx={{ color: 'primary.main' }}>
+                                    1,245
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">View Orders</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={2} md={4} size={6}>
+                        <Card sx={{ minHeight: 150, boxShadow: 3 }}>
+                            <CardContent>
+                                <Typography variant="h5" sx={{ color: 'black' }}>Profit</Typography>
+                                <Typography variant="p" sx={{ color: 'grey' }}>Last Month</Typography>
+                                <ChartBar/>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={2} md={4} size={6}>
+                        <Card sx={{ minHeight: 10, boxShadow: 3 }}>
+                            <CardContent>
+                                <Typography variant="h5" sx={{ color: 'black' }}>Report</Typography>
+                                <Typography variant="p" sx={{ color: 'grey' }}>Monthly Report</Typography>
+                                <Donut/>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
+            </Box>
+        </Box>
+    );
 }
