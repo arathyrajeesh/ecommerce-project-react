@@ -15,12 +15,11 @@ function Hero() {
             />
 
             <div className="hero-content">
-                {user ? (
-                    <h2 className="welcome-message">
-                        Welcome, <span>{user.name}</span> 
-                    </h2>
-                ) : null}
-
+            {user && user.role === "admin" ? (
+                <p>Welcome back, Admin {user.name}</p>
+                ) : (
+                <p>Welcome, {user?.name}</p>
+                )}
                 <h1>
                     BECOME <br /> ONE WITH <br /> NATURE
                 </h1>

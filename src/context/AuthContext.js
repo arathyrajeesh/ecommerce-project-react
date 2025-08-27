@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -11,31 +11,45 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const storedUser = localStorage.getItem("loggedInUser");
         if (storedUser) {
-        setUser(JSON.parse(storedUser));
+            setUser(JSON.parse(storedUser));
         }
         setLoading(false);
     }, []);
 
-    const login = (userData) => {
-        localStorage.setItem("loggedInUser", JSON.stringify(userData));
-        setUser(userData);
+    const normalizeUser = (userData) => {
+        return {
+            name: userData.name || userData.username || "Unknown User",
+            email: userData.email || "Not Provided",
+            role: userData.role || "user",
+        };
+    };
 
-        if (userData.role === "admin") {
-        navigate("/admin/dashboard");
+    const login = (userData) => {
+        const normalizedUser = normalizeUser(userData);
+
+        localStorage.setItem("loggedInUser", JSON.stringify(normalizedUser));
+        setUser(normalizedUser);
+
+        if (normalizedUser.role === "admin") {
+            navigate("/admin/dashboard");
         } else {
-        navigate("/home");
+            navigate("/home");
         }
     };
 
     const logout = () => {
         localStorage.removeItem("loggedInUser");
         setUser(null);
-        navigate("/admin/login");
+        if (user?.role === "admin") {
+            navigate("/admin/login");
+        } else {
+            navigate("/login");
+        }
     };
 
     return (
         <AuthContext.Provider value={{ user, loading, login, logout }}>
-        {children}
+            {children}
         </AuthContext.Provider>
     );
 };
