@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
         if (normalizedUser.role === "admin") {
             navigate("/admin/dashboard");
         } else {
-            navigate("/home");
+            navigate("/"); 
         }
     };
 

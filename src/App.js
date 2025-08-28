@@ -9,8 +9,13 @@ import AuthLayout from "./layout/AuthLayout";
 import AdminLayout from "./layout/AdminLayout";
 import ListingPage from "./components/ListingPage";
 import UserProfile from "./components/User";
-import DashBoard from "./components/DashBoard";
 import AdminLogin from "./components/AdminLogin";
+import AdminDashboardPage from "./pages/Admin/AdminDashboardPage";
+import OrderManagement from "./pages/Admin/OrderManagement";
+import ProductManagement from "./pages/Admin/ProductManagement";
+import CustomerManagement from "./pages/Admin/CustomerManagement";
+import AllProducts from "./pages/Admin/AllProducts";
+import AddProduct from "./pages/Admin/AddProduct";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -29,13 +34,16 @@ function App() {
         <Routes>
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Homepage />} />
+          </Route>
+
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/products/:id" element={<ProductView />} />
+            <Route path="/user" element={<UserProfile />} />
             <Route path="/shop" element={<ListingPage />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/products/:id" element={<ProductView />} />
-            <Route path="/user" element={<UserProfile />} />
           </Route>
 
           <Route element={<AuthLayout />}>
@@ -54,13 +62,14 @@ function App() {
           />
 
           <Route
-            element={
-              <ProtectedRoutes adminOnly={true}>
-                <AdminLayout />
-              </ProtectedRoutes>
-            }
+            element={<AdminLayout /> }
           >
-            <Route path="/admin/dashboard" element={<DashBoard />} />
+            <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+            <Route path="/admin/order" element={<OrderManagement />} />
+            <Route path="/admin/product" element={<ProductManagement />} />
+            <Route path="/admin/customer" element={<CustomerManagement />} />
+            <Route path="/admin/all_product" element={<AllProducts />} />
+            <Route path="/admin/add_product" element={<AddProduct/>} />
           </Route>
         </Routes>
       </Suspense>
