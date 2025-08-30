@@ -1,21 +1,8 @@
 import React from "react";
-import {
-    Box,
-    Typography,
-    Paper,
-    Grid,
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody,
-    Button,
-    Avatar,
-    Divider,
-} from "@mui/material";
+import {Box,Typography,Paper,Grid,Table,TableHead,TableRow,TableCell,TableBody,Divider,} from "@mui/material";
 
 const order = {
-    
+
     products: [
         { name: "Oneplus 10", details: "Storage:128gb", price: 896, qty: 3 },
         { name: "Nike Jordan", details: "Size:8UK", price: 392, qty: 1 },
