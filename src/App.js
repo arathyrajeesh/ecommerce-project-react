@@ -11,11 +11,11 @@ import ListingPage from "./components/ListingPage";
 import UserProfile from "./components/User";
 import AdminLogin from "./components/AdminLogin";
 import AdminDashboardPage from "./pages/Admin/AdminDashboardPage";
-import OrderManagement from "./pages/Admin/OrderManagement";
-import ProductManagement from "./pages/Admin/ProductManagement";
 import CustomerManagement from "./pages/Admin/CustomerManagement";
 import AllProducts from "./pages/Admin/AllProducts";
 import AddProduct from "./pages/Admin/AddProduct";
+import OrderManagement from "./pages/Admin/OrderManagement";
+import OrderDetails from "./pages/Admin/OrderDetails";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -65,11 +65,11 @@ function App() {
             element={<AdminLayout /> }
           >
             <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-            <Route path="/admin/order" element={<OrderManagement />} />
-            <Route path="/admin/product" element={<ProductManagement />} />
             <Route path="/admin/customer" element={<CustomerManagement />} />
             <Route path="/admin/all_product" element={<AllProducts />} />
             <Route path="/admin/add_product" element={<AddProduct/>} />
+            <Route path="/admin/order" element={<OrderDetails/>} />
+            <Route path="/admin/order_details" element={<OrderManagement/>} />
           </Route>
         </Routes>
       </Suspense>

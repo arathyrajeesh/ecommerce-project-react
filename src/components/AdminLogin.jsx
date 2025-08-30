@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import Spinner from "../components/Spinner"; 
 import "../styles/AdminLogin.css";
+import toast from "react-hot-toast";
 
 const AdminLogin = () => {
     const { login } = useContext(AuthContext);
@@ -29,7 +30,7 @@ const AdminLogin = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        setError("");
+        // setError("");
 
         setTimeout(() => {
         const admin = JSON.parse(localStorage.getItem("admin"));
@@ -38,7 +39,7 @@ const AdminLogin = () => {
             login(admin);
             navigate("/admin/dashboard"); 
         } else {
-            setError("❌ You are not authorized");
+            toast.error(" You are not authorized");
         }
 
         setLoading(false);

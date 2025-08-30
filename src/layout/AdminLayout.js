@@ -1,12 +1,13 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import {Box,Drawer as MuiDrawer,AppBar as MuiAppBar,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItemListItemButton,ListItemIcon,ListItemText,Button,Collapse,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle, ListItem, ListItemButton,} from "@mui/material";
+import {Box,Drawer as MuiDrawer,AppBar as MuiAppBar,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItemIcon,ListItemText,Button,Collapse,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle, ListItem, ListItemButton,} from "@mui/material";
 
 import {Menu as MenuIcon,ChevronLeft as ChevronLeftIcon,ChevronRight as ChevronRightIcon,Dashboard as DashboardIcon,People as PeopleIcon,Category as CategoryIcon,ShoppingCart as ShoppingCartIcon,Settings as SettingsIcon,PanoramaFishEye as PanoramaFishEyeIcon,KeyboardArrowDown as KeyboardArrowDownIcon,
 } from "@mui/icons-material";
 
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
 
@@ -84,7 +85,12 @@ const menuItems = [
         { text: "Add Product", path: "/admin/add_product" },
         ],
     },
-    { text: "Orders", icon: <CategoryIcon />, path: "/admin/order" },
+    { text: "Orders", icon: <CategoryIcon />,
+        children: [
+            { text: "Order List", path: "/admin/order" },
+            { text: "Order Details", path: "/admin/order_details" }
+        ]
+    },
     { text: "Customers", icon: <PeopleIcon />, path: "/admin/customer" },
 ];
 
@@ -116,7 +122,10 @@ const isActive = (path) => location.pathname === path;
 return (
     <Box sx={{ display: "flex" }}>
     <CssBaseline />
-    <AppBar position="fixed" open={open}>
+    <AppBar position="fixed" open={open} sx={{ 
+        backgroundColor: "black",  
+        color: "white"                
+    }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
             <IconButton
@@ -128,7 +137,7 @@ return (
             >
                 <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
+            <Typography variant="h6" noWrap sx={{fontWeight: "bold"}}>
                 Dashboard
             </Typography>
             </Box>
@@ -136,84 +145,109 @@ return (
             <IconButton color="inherit" sx={{ ml: 2 }}>
                 <SettingsIcon />
             </IconButton>
-            <Button color="inherit" onClick={handleLogoutClick}>
-                Logout
-            </Button>
             </Box>
         </Toolbar>
     </AppBar>
-    <Drawer variant="permanent" open={open}>
+    <Drawer
+    variant="permanent"
+    open={open}
+    sx={{
+        "& .MuiDrawer-paper": {
+        backgroundColor: "#fceaef",
+        color: "black",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between", 
+        },
+    }}
+    >
+    <Box>
         <DrawerHeader>
-            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
             MADAGASCAR
-            </Typography>
-            <IconButton onClick={handleDrawerClose}>
+        </Typography>
+        <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
+        </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-            {menuItems.map((item) => (
+        {menuItems.map((item) => (
             <React.Fragment key={item.text}>
-                <ListItem disablePadding sx={{ display: "block" }}>
-                    <ListItemButton
-                        onClick={() =>
-                        item.children ? toggleMenu(item.text) : navigate(item.path)
-                        }
-                        sx={{
-                        minHeight: 48,
-                        justifyContent: open ? "initial" : "center",
-                        px: 2.5,
-                        backgroundColor: isActive(item.path) ? "#f0f0f0" : "inherit",
-                        fontWeight: isActive(item.path) ? "bold" : "normal",
-                        }}
-                    >
-                        <ListItemIcon
-                        sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : "auto",
-                            justifyContent: "center",
-                            color: isActive(item.path) ? "primary.main" : "black",
-                        }}
-                        >
-                        {item.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                        {item.children && (
-                        <KeyboardArrowDownIcon
-                            sx={{
-                            ml: "auto",
-                            transition: "0.3s",
-                            transform: openMenus[item.text] ? "rotate(180deg)" : "rotate(0deg)",
-                            }}
-                        />
-                        )}
-                    </ListItemButton>
-                </ListItem>
+            <ListItem disablePadding sx={{ display: "block" }}>
+                <ListItemButton
+                onClick={() =>
+                    item.children ? toggleMenu(item.text) : navigate(item.path)
+                }
+                sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                    backgroundColor: isActive(item.path) ? "grey" : "inherit",
+                    fontWeight: isActive(item.path) ? "bold" : "normal",
+                }}
+                >
+                <ListItemIcon
+                    sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                    color: isActive(item.path) ? "#fceaef" : "black",
+                    }}
+                >
+                    {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
                 {item.children && (
-                <Collapse in={openMenus[item.text] && open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
+                    <KeyboardArrowDownIcon
+                    sx={{
+                        ml: "auto",
+                        transition: "0.3s",
+                        transform: openMenus[item.text]
+                        ? "rotate(180deg)"
+                        : "rotate(0deg)",
+                    }}
+                    />
+                )}
+                </ListItemButton>
+            </ListItem>
+            {item.children && (
+                <Collapse
+                in={openMenus[item.text] && open}
+                timeout="auto"
+                unmountOnExit
+                >
+                <List component="div" disablePadding>
                     {item.children.map((sub) => (
-                        <ListItemButton
+                    <ListItemButton
                         key={sub.text}
                         sx={{
-                            pl: 4,
-                            backgroundColor: isActive(sub.path) ? "#e0e0e0" : "inherit",
+                        pl: 4,
+                        backgroundColor: isActive(sub.path)
+                            ? "#e0e0e0"
+                            : "inherit",
                         }}
                         onClick={() => navigate(sub.path)}
-                        >
+                    >
                         <ListItemIcon>
-                            <PanoramaFishEyeIcon sx={{ fontSize: "small" }} />
+                        <PanoramaFishEyeIcon sx={{ fontSize: "small" }} />
                         </ListItemIcon>
                         <ListItemText primary={sub.text} />
-                        </ListItemButton>
+                    </ListItemButton>
                     ))}
-                    </List>
+                </List>
                 </Collapse>
-                )}
+            )}
             </React.Fragment>
-            ))}
+        ))}
         </List>
+    </Box>
+
+    <Box sx={{ p: 2 }}>
+        <IconButton color="black" onClick={handleLogoutClick}>
+        <LogoutIcon />
+        </IconButton>
+    </Box>
     </Drawer>
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
