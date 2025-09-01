@@ -70,7 +70,7 @@ export default function OrdersDashboard() {
 return (
 <Box sx={{ p: 3 }}>
     <Grid container spacing={2} sx={{ mb: 3 }}>
-    {stats.map((s, i) => (
+    {stats.map((stat, i) => (
         <Grid item xs={12} sm={6} md={3} key={i}>
         <Paper
             sx={{
@@ -82,11 +82,11 @@ return (
             }}
             elevation={2}
         >
-            {s.icon}
+            {stat.icon}
             <Box>
-            <Typography variant="h6">{s.value}</Typography>
+            <Typography variant="h6">{stat.value}</Typography>
             <Typography variant="body2" color="text.secondary">
-                {s.label}
+                {stat.label}
             </Typography>
             </Box>
         </Paper>
@@ -137,7 +137,7 @@ return (
             </TableRow>
         </TableHead>
         <TableBody>
-            {orders.map((o, i) => (
+            {orders.map((order, i) => (
             <TableRow key={i}>
                 <TableCell>
                 <IconButton size="small" color="primary">
@@ -145,35 +145,35 @@ return (
                 </IconButton>
                 </TableCell>
                 <TableCell>
-                <Typography color="primary">{o.id}</Typography>
+                <Typography color="primary">{order.id}</Typography>
                 </TableCell>
-                <TableCell>{o.date}</TableCell>
+                <TableCell>{order.date}</TableCell>
                 <TableCell>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <Avatar src={o.avatar} />
+                    <Avatar src={order.avatar} />
                     <Box>
-                    <Typography variant="body2">{o.customer}</Typography>
+                    <Typography variant="body2">{order.customer}</Typography>
                     <Typography
                         variant="caption"
                         color="text.secondary"
                     >
-                        {o.email}
+                        {order.email}
                     </Typography>
                     </Box>
                 </Box>
                 </TableCell>
                 <TableCell>
                 <Chip
-                    label={o.payment}
-                    color={paymentChipColor[o.payment]}
+                    label={order.payment}
+                    color={paymentChipColor[order.payment]}
                     variant="outlined"
                     size="small"
                 />
                 </TableCell>
                 <TableCell>
                 <Chip
-                    label={o.status}
-                    color={statusChipColor[o.status]}
+                    label={order.status}
+                    color={statusChipColor[order.status]}
                     variant="filled"
                     size="small"
                 />
