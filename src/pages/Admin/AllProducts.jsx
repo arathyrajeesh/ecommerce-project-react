@@ -1,5 +1,23 @@
 import React, { useState } from "react";
-import {Box,Paper,TextField,Select,MenuItem,Button,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Avatar,Typography,Switch,IconButton,Menu} from "@mui/material";
+import {
+    Box,
+    Paper,
+    TextField,
+    Select,
+    MenuItem,
+    Button,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Avatar,
+    Typography,
+    Switch,
+    IconButton,
+    Menu,
+} from "@mui/material";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DownloadIcon from "@mui/icons-material/Download";
@@ -70,19 +88,22 @@ export default function ProductDashboard() {
 
     const handleExport = (type) => {
         if (type === "csv") {
-            let csv = "Name,Stock,SKU,Qty\n";
-            products.forEach((p) => {
-                csv += `${p.name},${p.stock ? "In Stock" : "Out of Stock"},${p.sku},${p.qty}\n`;
-            });
-            const blob = new Blob([csv], { type: "text/csv" });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = "products.csv";
-            link.click();
+        let csv = "Name,Stock,SKU,Qty\n";
+        products.forEach((p) => {
+            csv += `${p.name},${p.stock ? "In Stock" : "Out of Stock"},${
+            p.sku
+            },${p.qty}\n`;
+        });
+        const blob = new Blob([csv], { type: "text/csv" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "products.csv";
+        link.click();
         }
         if (type === "print") window.print();
-        if (type === "copy") navigator.clipboard.writeText(JSON.stringify(products, null, 2));
+        if (type === "copy")
+        navigator.clipboard.writeText(JSON.stringify(products, null, 2));
         if (type === "pdf") alert("PDF export needs jsPDF or similar lib ");
         if (type === "excel") alert("Excel export needs SheetJS (xlsx) ");
 
@@ -97,180 +118,176 @@ export default function ProductDashboard() {
 
     const filteredProducts = products.filter((p) => {
         const matchSearch =
-            p.name.toLowerCase().includes(search.toLowerCase()) ||
-            p.desc.toLowerCase().includes(search.toLowerCase());
+        p.name.toLowerCase().includes(search.toLowerCase()) ||
+        p.desc.toLowerCase().includes(search.toLowerCase());
 
         const matchStatus =
-            statusFilter === "Status"
-                ? true
-                : statusFilter === "Active"
-                ? p.stock
-                : !p.stock;
+        statusFilter === "Status"
+            ? true
+            : statusFilter === "Active"
+            ? p.stock
+            : !p.stock;
 
         const matchStock =
-            stockFilter === "Stock"
-                ? true
-                : stockFilter === "In Stock"
-                ? p.stock
-                : !p.stock;
+        stockFilter === "Stock"
+            ? true
+            : stockFilter === "In Stock"
+            ? p.stock
+            : !p.stock;
 
         return matchSearch && matchStatus && matchStock;
     });
 
-    return (
-        <Box sx={{ p: 3 }}>
-            <Paper sx={{ p: 2, mb: 2, borderRadius: 2 }} elevation={2}>
-                <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
-                    <Select
-                        value={statusFilter}
-                        onChange={(e) => setStatusFilter(e.target.value)}
-                        size="small"
-                    >
-                        <MenuItem value="Status">Status</MenuItem>
-                        <MenuItem value="Active">Active</MenuItem>
-                        <MenuItem value="Inactive">Inactive</MenuItem>
-                    </Select>
-                    <Select
-                        value={stockFilter}
-                        onChange={(e) => setStockFilter(e.target.value)}
-                        size="small"
-                    >
-                        <MenuItem value="Stock">Stock</MenuItem>
-                        <MenuItem value="In Stock">In Stock</MenuItem>
-                        <MenuItem value="Out of Stock">Out of Stock</MenuItem>
-                    </Select>
-                </Box>
+return (
+<Box sx={{ p: 3 }}>
+    <Paper sx={{ p: 2, mb: 2, borderRadius: 2 }} elevation={2}>
+    <Box
+        sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        mb: 2,
+        gap: 2,
+        flexWrap: "wrap",
+        }}
+    >
+        <TextField
+        placeholder="Search Product"
+        size="small"
+        sx={{ width: 250 }}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        />
 
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <Button
+            variant="outlined"
+            startIcon={<DownloadIcon />}
+            size="small"
+            onClick={handleExportClick}
+        >
+            Export
+        </Button>
+
+        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+            <MenuItem onClick={() => handleExport("print")}>
+            <PrintIcon fontSize="small" sx={{ mr: 1 }} /> Print
+            </MenuItem>
+            <MenuItem onClick={() => handleExport("csv")}>
+            <TableChartIcon fontSize="small" sx={{ mr: 1 }} /> CSV
+            </MenuItem>
+            <MenuItem onClick={() => handleExport("excel")}>
+            <GridOnIcon fontSize="small" sx={{ mr: 1 }} /> Excel
+            </MenuItem>
+            <MenuItem onClick={() => handleExport("pdf")}>
+            <PictureAsPdfIcon fontSize="small" sx={{ mr: 1 }} /> PDF
+            </MenuItem>
+            <MenuItem onClick={() => handleExport("copy")}>
+            <FileCopyIcon fontSize="small" sx={{ mr: 1 }} /> Copy
+            </MenuItem>
+        </Menu>
+
+        <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            size="small"
+            sx={{ backgroundColor: "#6c5ce7" }}
+            onClick={() => navigate("/admin/add_product")}
+        >
+            Add Product
+        </Button>
+        </Box>
+    </Box>
+
+    <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+        <Select
+        value={statusFilter}
+        onChange={(e) => setStatusFilter(e.target.value)}
+        size="small"
+        sx={{ minWidth: 100, fontSize: "0.8rem", height: 32 }}
+        >
+        <MenuItem value="Status">Status</MenuItem>
+        <MenuItem value="Active">Active</MenuItem>
+        <MenuItem value="Inactive">Inactive</MenuItem>
+        </Select>
+
+        <Select
+        value={stockFilter}
+        onChange={(e) => setStockFilter(e.target.value)}
+        size="small"
+        sx={{ minWidth: 100, fontSize: "0.8rem", height: 32 }}
+        >
+        <MenuItem value="Stock">Stock</MenuItem>
+        <MenuItem value="In Stock">In Stock</MenuItem>
+        <MenuItem value="Out of Stock">Out of Stock</MenuItem>
+        </Select>
+
+        <Select
+        size="small"
+        value={rowsPerPage}
+        onChange={(e) => setRowsPerPage(e.target.value)}
+        sx={{ minWidth: 70, fontSize: "0.8rem", height: 32 }}
+        >
+        <MenuItem value={7}>7</MenuItem>
+        <MenuItem value={10}>10</MenuItem>
+        <MenuItem value={20}>20</MenuItem>
+        </Select>
+    </Box>
+
+    <TableContainer>
+        <Table>
+        <TableHead>
+            <TableRow>
+            <TableCell></TableCell>
+            <TableCell>Product</TableCell>
+            <TableCell>Stock</TableCell>
+            <TableCell>SKU</TableCell>
+            <TableCell>QTY</TableCell>
+            </TableRow>
+        </TableHead>
+        <TableBody>
+            {filteredProducts.slice(0, rowsPerPage).map((content, i) => (
+            <TableRow key={i}>
+                <TableCell>
+                <IconButton size="small" color="primary">
+                    <AddCircleOutlineIcon />
+                </IconButton>
+                </TableCell>
+                <TableCell>
                 <Box
                     sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        mb: 2,
-                        gap: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
                     }}
                 >
-                    <TextField
-                        placeholder="Search Product"
-                        size="small"
-                        sx={{ width: 250 }}
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
+                    <Avatar
+                    variant="rounded"
+                    src={content.img}
+                    alt={content.name}
+                    sx={{ width: 40, height: 40 }}
                     />
-
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                        <Select
-                            size="small"
-                            value={rowsPerPage}
-                            onChange={(e) => setRowsPerPage(e.target.value)}
-                        >
-                            <MenuItem value={7}>7</MenuItem>
-                            <MenuItem value={10}>10</MenuItem>
-                            <MenuItem value={20}>20</MenuItem>
-                        </Select>
-
-                        <Button
-                            variant="outlined"
-                            startIcon={<DownloadIcon />}
-                            size="small"
-                            onClick={handleExportClick}
-                        >
-                            Export
-                        </Button>
-
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                        >
-                            <MenuItem onClick={() => handleExport("print")}>
-                                <PrintIcon fontSize="small" sx={{ mr: 1 }} /> Print
-                            </MenuItem>
-                            <MenuItem onClick={() => handleExport("csv")}>
-                                <TableChartIcon fontSize="small" sx={{ mr: 1 }} /> CSV
-                            </MenuItem>
-                            <MenuItem onClick={() => handleExport("excel")}>
-                                <GridOnIcon fontSize="small" sx={{ mr: 1 }} /> Excel
-                            </MenuItem>
-                            <MenuItem onClick={() => handleExport("pdf")}>
-                                <PictureAsPdfIcon fontSize="small" sx={{ mr: 1 }} /> PDF
-                            </MenuItem>
-                            <MenuItem onClick={() => handleExport("copy")}>
-                                <FileCopyIcon fontSize="small" sx={{ mr: 1 }} /> Copy
-                            </MenuItem>
-                        </Menu>
-
-                        <Button
-                            variant="contained"
-                            startIcon={<AddIcon />}
-                            size="small"
-                            sx={{ backgroundColor: "#6c5ce7" }}
-                            onClick={() => navigate("/admin/add_product")}
-                        >
-                            Add Product
-                        </Button>
+                    <Box>
+                    <Typography variant="body2">{content.name}</Typography>
+                    <Typography variant="caption" color="text.secondary">
+                        {content.desc}
+                    </Typography>
                     </Box>
                 </Box>
-
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell></TableCell>
-                                <TableCell>Product</TableCell>
-                                <TableCell>Stock</TableCell>
-                                <TableCell>SKU</TableCell>
-                                <TableCell>QTY</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {filteredProducts.slice(0, rowsPerPage).map((content, i) => (
-                                <TableRow key={i}>
-                                    <TableCell>
-                                        <IconButton size="small" color="primary">
-                                            <AddCircleOutlineIcon />
-                                        </IconButton>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Box
-                                            sx={{
-                                                display: "flex",
-                                                alignItems: "center",
-                                                gap: 2,
-                                            }}
-                                        >
-                                            <Avatar
-                                                variant="rounded"
-                                                src={content.img}
-                                                alt={content.name}
-                                                sx={{ width: 40, height: 40 }}
-                                            />
-                                            <Box>
-                                                <Typography variant="body2">
-                                                    {content.name}
-                                                </Typography>
-                                                <Typography
-                                                    variant="caption"
-                                                    color="text.secondary"
-                                                >
-                                                    {content.desc}
-                                                </Typography>
-                                            </Box>
-                                        </Box>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Switch
-                                            checked={content.stock}
-                                            onChange={() => handleStockToggle(i)}
-                                        />
-                                    </TableCell>
-                                    <TableCell>{content.sku}</TableCell>
-                                    <TableCell>{content.qty}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Paper>
-        </Box>
-    );
+                </TableCell>
+                <TableCell>
+                <Switch
+                    checked={content.stock}
+                    onChange={() => handleStockToggle(i)}
+                />
+                </TableCell>
+                <TableCell>{content.sku}</TableCell>
+                <TableCell>{content.qty}</TableCell>
+            </TableRow>
+            ))}
+        </TableBody>
+        </Table>
+    </TableContainer>
+    </Paper>
+</Box>
+);
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import {Box,Grid,Paper,Typography,Divider,TextField,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Avatar,Chip,IconButton,MenuItem,Select,Button,} from "@mui/material";
+import {Box,Grid,Paper,Typography,TextField,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Avatar,Chip,IconButton,MenuItem,Select,Button,} from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
@@ -22,7 +22,7 @@ const orders = [
         email: "ceasomw@theguardian.com",
         avatar: "",
         payment: "Pending",
-        status: "Delivered",
+        status: "Dispatched",
     },
     {
         id: "#6624",

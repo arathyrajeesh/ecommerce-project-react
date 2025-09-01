@@ -9,17 +9,6 @@ const order = {
         { name: "Wooden Chair", details: "Material: Wooden", price: 841, qty: 2 },
         { name: "Face cream", details: "Gender:Women", price: 813, qty: 2 },
     ],
-    customer: {
-        name: "Shamus Tuttle",
-        id: "#58909",
-        email: "Shamus889@yahoo.com",
-        phone: "+1 (609) 972-22-22",
-        orders: 12,
-        avatar: "https://i.pravatar.cc/100",
-    },
-    shipping: {
-        address: "45 Roker Terrace\nLatheronwheel\nKW5 8NW, London, UK",
-    },
 };
 
 export default function OrderDetails() {
@@ -33,7 +22,7 @@ export default function OrderDetails() {
 return (
 <Box p={3}>
 
-    <Grid container spacing={3}>
+    <Grid container spacing={3} sx={{display:"flex",justifyContent:"center"}}>
     <Grid item xs={12} md={8}>
         <Paper sx={{ p: 2 }}>
         <Typography variant="h6" mb={2}>
