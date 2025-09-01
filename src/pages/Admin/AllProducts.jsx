@@ -223,7 +223,7 @@ export default function ProductDashboard() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {filteredProducts.slice(0, rowsPerPage).map((p, i) => (
+                            {filteredProducts.slice(0, rowsPerPage).map((content, i) => (
                                 <TableRow key={i}>
                                     <TableCell>
                                         <IconButton size="small" color="primary">
@@ -240,31 +240,31 @@ export default function ProductDashboard() {
                                         >
                                             <Avatar
                                                 variant="rounded"
-                                                src={p.img}
-                                                alt={p.name}
+                                                src={content.img}
+                                                alt={content.name}
                                                 sx={{ width: 40, height: 40 }}
                                             />
                                             <Box>
                                                 <Typography variant="body2">
-                                                    {p.name}
+                                                    {content.name}
                                                 </Typography>
                                                 <Typography
                                                     variant="caption"
                                                     color="text.secondary"
                                                 >
-                                                    {p.desc}
+                                                    {content.desc}
                                                 </Typography>
                                             </Box>
                                         </Box>
                                     </TableCell>
                                     <TableCell>
                                         <Switch
-                                            checked={p.stock}
+                                            checked={content.stock}
                                             onChange={() => handleStockToggle(i)}
                                         />
                                     </TableCell>
-                                    <TableCell>{p.sku}</TableCell>
-                                    <TableCell>{p.qty}</TableCell>
+                                    <TableCell>{content.sku}</TableCell>
+                                    <TableCell>{content.qty}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
