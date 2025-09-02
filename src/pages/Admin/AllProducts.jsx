@@ -1,105 +1,42 @@
 import React, { useState } from "react";
-import {Box,Paper,TextField,Select,MenuItem,Button,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Avatar,Typography,Switch,IconButton,Menu, Grid, Divider} from "@mui/material";
+import {Box, Paper, TextField, Select, MenuItem, Button, Table,TableBody, TableCell, TableContainer, TableHead, TableRow,Avatar, Typography, Switch, IconButton, Menu, Dialog,DialogActions, DialogContent, DialogTitle, Divider} from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DownloadIcon from "@mui/icons-material/Download";
-import AddIcon from "@mui/icons-material/Add";
-import PrintIcon from "@mui/icons-material/Print";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import GridOnIcon from "@mui/icons-material/GridOn";
-import TableChartIcon from "@mui/icons-material/TableChart";
 
 import { useNavigate } from "react-router-dom";
 
 const sampleProducts = [
-    {
-        name: "Air Jordan",
-        desc: "Air Jordan is a line of basketball shoes produced by Nike",
-        img: "https://i.ibb.co/n7F4d5m/shoe.png",
-        stock: false,
-        sku: "31063",
-        qty: "942",
-    },
-    {
-        name: "Amazon Fire TV",
-        desc: "4K UHD smart TV, stream live TV without cable",
-        img: "https://i.ibb.co/hg3R2Mp/tv.png",
-        stock: false,
-        sku: "5829",
-        qty: "587",
-    },
-    {
-        name: "Apple iPad",
-        desc: "10.2-inch Retina Display, 64GB",
-        img: "https://i.ibb.co/pRtLq1F/ipad.png",
-        stock: true,
-        sku: "35946",
-        qty: "468",
-    },
-    {
-        name: "Apple Watch Series 7",
-        desc: "Starlight Aluminum Case with Starlight Sport Band",
-        img: "https://i.ibb.co/c2Yy7wK/watch.png",
-        stock: false,
-        sku: "46658",
-        qty: "301",
-    },
-    {
-        name: "BANGE Anti Theft Backpack",
-        desc: "Stylish anti-theft backpack for daily use",
-        img: "https://i.ibb.co/pKr0mFj/bag.png",
-        stock: true,
-        sku: "41867",
-        qty: "579",
-    },
+    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "https://i.ibb.co/n7F4d5m/shoe.png", stock: false, sku: "31063", qty: "942" },
+    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "https://i.ibb.co/hg3R2Mp/tv.png", stock: false, sku: "5829", qty: "587" },
+    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "https://i.ibb.co/pRtLq1F/ipad.png", stock: true, sku: "35946", qty: "468" },
 ];
+
 const stats = [
     { label: "Pending Payment", value: 56, icon: <CalendarTodayIcon /> },
     { label: "Completed", value: 12689, icon: <DoneAllIcon /> },
     { label: "Refunded", value: 124, icon: <AccountBalanceWalletIcon /> },
     { label: "Failed", value: 32, icon: <ErrorOutlineIcon /> },
 ];
+
 export default function ProductDashboard() {
-
-    const navigate = useNavigate();
-
     const [products, setProducts] = useState(sampleProducts);
     const [search, setSearch] = useState("");
     const [statusFilter, setStatusFilter] = useState("Status");
     const [stockFilter, setStockFilter] = useState("Stock");
     const [rowsPerPage, setRowsPerPage] = useState(7);
-
     const [anchorEl, setAnchorEl] = useState(null);
+    const [open, setOpen] = useState(false);
+
+    const [newProduct, setNewProduct] = useState({
+        name: "", desc: "", img: "", stock: false, sku: "", qty: ""
+    });
+
     const handleExportClick = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
-
-    const handleExport = (type) => {
-        if (type === "csv") {
-        let csv = "Name,Stock,SKU,Qty\n";
-        products.forEach((p) => {
-            csv += `${p.name},${p.stock ? "In Stock" : "Out of Stock"},${
-            p.sku
-            },${p.qty}\n`;
-        });
-        const blob = new Blob([csv], { type: "text/csv" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "products.csv";
-        link.click();
-        }
-        if (type === "print") window.print();
-        if (type === "copy")
-        navigator.clipboard.writeText(JSON.stringify(products, null, 2));
-        if (type === "pdf") alert("PDF export needs jsPDF or similar lib ");
-        if (type === "excel") alert("Excel export needs SheetJS (xlsx) ");
-
-        handleClose();
-    };
 
     const handleStockToggle = (index) => {
         const updated = [...products];
@@ -108,78 +45,44 @@ export default function ProductDashboard() {
     };
 
     const filteredProducts = products.filter((p) => {
-        const matchSearch =
-        p.name.toLowerCase().includes(search.toLowerCase()) ||
-        p.desc.toLowerCase().includes(search.toLowerCase());
-
-        const matchStatus =
-        statusFilter === "Status"
-            ? true
-            : statusFilter === "Active"
-            ? p.stock
-            : !p.stock;
-
-        const matchStock =
-        stockFilter === "Stock"
-            ? true
-            : stockFilter === "In Stock"
-            ? p.stock
-            : !p.stock;
-
+        const matchSearch = p.name.toLowerCase().includes(search.toLowerCase()) || p.desc.toLowerCase().includes(search.toLowerCase());
+        const matchStatus = statusFilter === "Status" ? true : statusFilter === "Active" ? p.stock : !p.stock;
+        const matchStock = stockFilter === "Stock" ? true : stockFilter === "In Stock" ? p.stock : !p.stock;
         return matchSearch && matchStatus && matchStock;
     });
+
+    const handleClickOpen = () => setOpen(true);
+    const handleCloseDialog = () => setOpen(false);
+
+    const handleAddProduct = () => {
+        setProducts([...products, newProduct]);
+        setNewProduct({ name: "", desc: "", img: "", stock: false, sku: "", qty: "" });
+        handleCloseDialog();
+    };
 
 return (
 <Box sx={{ p: 3 }}>
     <Paper elevation={2} sx={{ p: 2, borderRadius: 2 }}>
-        <Box sx={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center' 
-        }}>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         {stats.map((item, index) => (
-            <React.Fragment key={index}>
-                <Box sx={{ flexGrow: 1, p: 1 }}>
-                    <Box 
-                    sx={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'space-between' 
-                    }}>
-                        <Box>
-                            <Typography variant="h4" fontWeight="bold">
-                                {item.value}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {item.label}
-                            </Typography>
-                        </Box>
-                        <Box color="text.secondary" sx={{ fontSize: 32 }}>
-                            {item.icon}
-                        </Box>
-                    </Box>
+        <React.Fragment key={index}>
+            <Box sx={{ flexGrow: 1, p: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Box>
+                <Typography variant="h4" fontWeight="bold">{item.value}</Typography>
+                <Typography variant="body2" color="text.secondary">{item.label}</Typography>
                 </Box>
-                {index < stats.length - 1 && (
-                    <Divider
-                        orientation="vertical"
-                        flexItem
-                        sx={{ display: { xs: "none", sm: "block" } }}
-                    />
-                )}
-            </React.Fragment>
+                <Box color="text.secondary" sx={{ fontSize: 32 }}>{item.icon}</Box>
+            </Box>
+            </Box>
+            {index < stats.length - 1 && <Divider orientation="vertical" flexItem sx={{ display: { xs: "none", sm: "block" } }} />}
+        </React.Fragment>
         ))}
-        </Box>
+    </Box>
     </Paper>
+
     <Paper sx={{ p: 2, mt: 2, borderRadius: 2 }} elevation={2}>
-    <Box
-        sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        mb: 2,
-        gap: 2,
-        flexWrap: "wrap",
-        }}
-    >
+    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2, gap: 2, flexWrap: "wrap" }}>
         <TextField
         placeholder="Search Product"
         size="small"
@@ -189,67 +92,10 @@ return (
         />
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-        <Button
-            variant="outlined"
-            startIcon={<DownloadIcon />}
-            size="small"
-            onClick={handleExportClick}
-        >
-            Export
-        </Button>
+        <Button variant="outlined" startIcon={<DownloadIcon />} size="small" onClick={handleExportClick}>Export</Button>
 
-        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={() => handleExport("print")}>
-            <PrintIcon fontSize="small" sx={{ mr: 1 }} /> Print
-            </MenuItem>
-            <MenuItem onClick={() => handleExport("csv")}>
-            <TableChartIcon fontSize="small" sx={{ mr: 1 }} /> CSV
-            </MenuItem>
-            <MenuItem onClick={() => handleExport("excel")}>
-            <GridOnIcon fontSize="small" sx={{ mr: 1 }} /> Excel
-            </MenuItem>
-            <MenuItem onClick={() => handleExport("pdf")}>
-            <PictureAsPdfIcon fontSize="small" sx={{ mr: 1 }} /> PDF
-            </MenuItem>
-            <MenuItem onClick={() => handleExport("copy")}>
-            <FileCopyIcon fontSize="small" sx={{ mr: 1 }} /> Copy
-            </MenuItem>
-        </Menu>
-
-        <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            size="small"
-            sx={{ backgroundColor: "#6c5ce7" }}
-            onClick={() => navigate("/admin/add_product")}
-        >
-            Add Product
-        </Button>
+        <Button variant="outlined" sx={{ bgcolor: 'blue', color: 'white' }} onClick={handleClickOpen}>Add Product</Button>
         </Box>
-    </Box>
-
-    <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
-        <Select
-        value={statusFilter}
-        onChange={(e) => setStatusFilter(e.target.value)}
-        size="small"
-        sx={{ minWidth: 100, fontSize: "0.8rem", height: 32 }}
-        >
-        <MenuItem value="Status">Status</MenuItem>
-        <MenuItem value="Active">Active</MenuItem>
-        <MenuItem value="Inactive">Inactive</MenuItem>
-        </Select>
-
-        <Select
-        value={stockFilter}
-        onChange={(e) => setStockFilter(e.target.value)}
-        size="small"
-        sx={{ minWidth: 100, fontSize: "0.8rem", height: 32 }}
-        >
-        <MenuItem value="Stock">Stock</MenuItem>
-        <MenuItem value="In Stock">In Stock</MenuItem>
-        <MenuItem value="Out of Stock">Out of Stock</MenuItem>
-        </Select>
     </Box>
 
     <TableContainer>
@@ -267,38 +113,18 @@ return (
             {filteredProducts.slice(0, rowsPerPage).map((content, i) => (
             <TableRow key={i}>
                 <TableCell>
-                <IconButton size="small" color="primary">
-                    <AddCircleOutlineIcon />
-                </IconButton>
+                <IconButton size="small" color="primary"><AddCircleOutlineIcon /></IconButton>
                 </TableCell>
                 <TableCell>
-                <Box
-                    sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                    }}
-                >
-                    <Avatar
-                    variant="rounded"
-                    src={content.img}
-                    alt={content.name}
-                    sx={{ width: 40, height: 40 }}
-                    />
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                    <Avatar variant="rounded" src={content.img} alt={content.name} sx={{ width: 40, height: 40 }} />
                     <Box>
                     <Typography variant="body2">{content.name}</Typography>
-                    <Typography variant="caption" color="text.secondary">
-                        {content.desc}
-                    </Typography>
+                    <Typography variant="caption" color="text.secondary">{content.desc}</Typography>
                     </Box>
                 </Box>
                 </TableCell>
-                <TableCell>
-                <Switch
-                    checked={content.stock}
-                    onChange={() => handleStockToggle(i)}
-                />
-                </TableCell>
+                <TableCell><Switch checked={content.stock} onChange={() => handleStockToggle(i)} /></TableCell>
                 <TableCell>{content.sku}</TableCell>
                 <TableCell>{content.qty}</TableCell>
             </TableRow>
@@ -307,6 +133,28 @@ return (
         </Table>
     </TableContainer>
     </Paper>
+
+    <Dialog open={open} onClose={handleCloseDialog}>
+    <DialogTitle>Add New Product</DialogTitle>
+    <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
+        <TextField label="Name" value={newProduct.name} onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} fullWidth />
+        <TextField label="Description" value={newProduct.desc} onChange={(e) => setNewProduct({ ...newProduct, desc: e.target.value })} fullWidth />
+        <TextField label="Image URL" value={newProduct.img} onChange={(e) => setNewProduct({ ...newProduct, img: e.target.value })} fullWidth />
+        <TextField label="SKU" value={newProduct.sku} onChange={(e) => setNewProduct({ ...newProduct, sku: e.target.value })} fullWidth />
+        <TextField label="Quantity" value={newProduct.qty} onChange={(e) => setNewProduct({ ...newProduct, qty: e.target.value })} fullWidth />
+        <Select
+        value={newProduct.stock ? "In Stock" : "Out of Stock"}
+        onChange={(e) => setNewProduct({ ...newProduct, stock: e.target.value === "In Stock" })}
+        >
+        <MenuItem value="In Stock">In Stock</MenuItem>
+        <MenuItem value="Out of Stock">Out of Stock</MenuItem>
+        </Select>
+    </DialogContent>
+    <DialogActions>
+        <Button onClick={handleCloseDialog}>Cancel</Button>
+        <Button onClick={handleAddProduct} variant="contained">Add</Button>
+    </DialogActions>
+    </Dialog>
 </Box>
 );
 }
