@@ -1,24 +1,9 @@
 import React, { useState } from "react";
-import {
-    Box,
-    Paper,
-    TextField,
-    Select,
-    MenuItem,
-    Button,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Avatar,
-    Typography,
-    Switch,
-    IconButton,
-    Menu,
-} from "@mui/material";
-
+import {Box,Paper,TextField,Select,MenuItem,Button,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Avatar,Typography,Switch,IconButton,Menu, Grid, Divider} from "@mui/material";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DownloadIcon from "@mui/icons-material/Download";
 import AddIcon from "@mui/icons-material/Add";
@@ -72,8 +57,14 @@ const sampleProducts = [
         qty: "579",
     },
 ];
-
+const stats = [
+    { label: "Pending Payment", value: 56, icon: <CalendarTodayIcon /> },
+    { label: "Completed", value: 12689, icon: <DoneAllIcon /> },
+    { label: "Refunded", value: 124, icon: <AccountBalanceWalletIcon /> },
+    { label: "Failed", value: 32, icon: <ErrorOutlineIcon /> },
+];
 export default function ProductDashboard() {
+
     const navigate = useNavigate();
 
     const [products, setProducts] = useState(sampleProducts);
@@ -140,7 +131,46 @@ export default function ProductDashboard() {
 
 return (
 <Box sx={{ p: 3 }}>
-    <Paper sx={{ p: 2, mb: 2, borderRadius: 2 }} elevation={2}>
+    <Paper elevation={2} sx={{ p: 2, borderRadius: 2 }}>
+        <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center' 
+        }}>
+        {stats.map((item, index) => (
+            <React.Fragment key={index}>
+                <Box sx={{ flexGrow: 1, p: 1 }}>
+                    <Box 
+                    sx={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'space-between' 
+                    }}>
+                        <Box>
+                            <Typography variant="h4" fontWeight="bold">
+                                {item.value}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {item.label}
+                            </Typography>
+                        </Box>
+                        <Box color="text.secondary" sx={{ fontSize: 32 }}>
+                            {item.icon}
+                        </Box>
+                    </Box>
+                </Box>
+                {index < stats.length - 1 && (
+                    <Divider
+                        orientation="vertical"
+                        flexItem
+                        sx={{ display: { xs: "none", sm: "block" } }}
+                    />
+                )}
+            </React.Fragment>
+        ))}
+        </Box>
+    </Paper>
+    <Paper sx={{ p: 2, mt: 2, borderRadius: 2 }} elevation={2}>
     <Box
         sx={{
         display: "flex",
@@ -219,17 +249,6 @@ return (
         <MenuItem value="Stock">Stock</MenuItem>
         <MenuItem value="In Stock">In Stock</MenuItem>
         <MenuItem value="Out of Stock">Out of Stock</MenuItem>
-        </Select>
-
-        <Select
-        size="small"
-        value={rowsPerPage}
-        onChange={(e) => setRowsPerPage(e.target.value)}
-        sx={{ minWidth: 70, fontSize: "0.8rem", height: 32 }}
-        >
-        <MenuItem value={7}>7</MenuItem>
-        <MenuItem value={10}>10</MenuItem>
-        <MenuItem value={20}>20</MenuItem>
         </Select>
     </Box>
 
