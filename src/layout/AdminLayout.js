@@ -1,12 +1,44 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import {Box,Drawer as MuiDrawer,AppBar as MuiAppBar,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItemIcon,ListItemText,Button,Collapse,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle, ListItem, ListItemButton,} from "@mui/material";
+import {
+    Box,
+    Drawer as MuiDrawer,
+    AppBar as MuiAppBar,
+    Toolbar,
+    List,
+    CssBaseline,
+    Typography,
+    Divider,
+    IconButton,
+    ListItemIcon,
+    ListItemText,
+    Button,
+    Collapse,
+    Dialog,
+    DialogActions,DialogContent,
+    DialogContentText,DialogTitle,
+    ListItem,ListItemButton,
+    Menu,MenuItem,
+} from "@mui/material";
 
-import {Menu as MenuIcon,ChevronLeft as ChevronLeftIcon,ChevronRight as ChevronRightIcon,Dashboard as DashboardIcon,People as PeopleIcon,Category as CategoryIcon,ShoppingCart as ShoppingCartIcon,Settings as SettingsIcon,PanoramaFishEye as PanoramaFishEyeIcon,KeyboardArrowDown as KeyboardArrowDownIcon,} from "@mui/icons-material";
+import {
+    Menu as MenuIcon,
+    ChevronLeft as ChevronLeftIcon,
+    ChevronRight as ChevronRightIcon,
+    Dashboard as DashboardIcon,
+    People as PeopleIcon,
+    Category as CategoryIcon,
+    ShoppingCart as ShoppingCartIcon,
+    Settings as SettingsIcon,
+    PanoramaFishEye as PanoramaFishEyeIcon,
+    KeyboardArrowDown as KeyboardArrowDownIcon,
+} from "@mui/icons-material";
 
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 const drawerWidth = 240;
 
@@ -17,9 +49,9 @@ const openedMixin = (theme) => ({
         duration: theme.transitions.duration.enteringScreen,
     }),
     overflowX: "hidden",
-});
+    });
 
-const closedMixin = (theme) => ({
+    const closedMixin = (theme) => ({
     transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -29,17 +61,17 @@ const closedMixin = (theme) => ({
     [theme.breakpoints.up("sm")]: {
         width: `calc(${theme.spacing(8)} + 1px)`,
     },
-});
+    });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
+    const DrawerHeader = styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
-}));
+    }));
 
-const AppBar = styled(MuiAppBar, {
+    const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open",
     })(({ theme, open }) => ({
     zIndex: theme.zIndex.drawer + 1,
@@ -55,9 +87,9 @@ const AppBar = styled(MuiAppBar, {
         duration: theme.transitions.duration.enteringScreen,
         }),
     }),
-}));
+    }));
 
-const Drawer = styled(MuiDrawer, {
+    const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
     })(({ theme, open }) => ({
     width: drawerWidth,
@@ -84,11 +116,13 @@ const menuItems = [
         { text: "Add Product", path: "/admin/add_product" },
         ],
     },
-    { text: "Orders", icon: <CategoryIcon />,
+    {
+        text: "Orders",
+        icon: <CategoryIcon />,
         children: [
-            { text: "Order List", path: "/admin/order" },
-            { text: "Order Details", path: "/admin/order_details" }
-        ]
+        { text: "Order List", path: "/admin/order" },
+        { text: "Order Details", path: "/admin/order_details" },
+        ],
     },
     { text: "Customers", icon: <PeopleIcon />, path: "/admin/customer" },
 ];
@@ -101,52 +135,67 @@ function Dashboard() {
     const location = useLocation();
     const navigate = useNavigate();
 
+  // For user menu
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [submenuAnchorEl, setSubmenuAnchorEl] = React.useState(null);
+
+    const openUserMenu = Boolean(anchorEl);
+    const openSubmenu = Boolean(submenuAnchorEl);
+
+    const handleUserClick = (event) => setAnchorEl(event.currentTarget);
+    const handleCloseUserMenu = () => {
+        setAnchorEl(null);
+        setSubmenuAnchorEl(null);
+    };
+
+    const handleOpenSubmenu = (event) => setSubmenuAnchorEl(event.currentTarget);
+    const handleCloseSubmenu = () => setSubmenuAnchorEl(null);
+
     const handleDrawerOpen = () => setOpen(true);
     const handleDrawerClose = () => setOpen(false);
 
-const toggleMenu = (menu) => {
-    setOpenMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));
-};
+    const toggleMenu = (menu) => {
+        setOpenMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));
+    };
 
-const handleLogoutClick = () => setOpenDialog(true);
-const handleCloseDialog = () => setOpenDialog(false);
+    const handleLogoutClick = () => setOpenDialog(true);
+    const handleCloseDialog = () => setOpenDialog(false);
 
-const confirmLogout = () => {
-    localStorage.removeItem("loggedInUser");
-    navigate("/admin/login");
-};
+    const confirmLogout = () => {
+        localStorage.removeItem("loggedInUser");
+        navigate("/admin/login");
+    };
 
-const isActive = (path) => location.pathname === path;
+    const isActive = (path) => location.pathname === path;
 
 return (
-    <Box sx={{ display: "flex" }}>
+<Box sx={{ display: "flex" }}>
     <CssBaseline />
-    <AppBar position="fixed" open={open} sx={{ 
-        backgroundColor: "black",  
-        color: "white"                
-    }}>
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-            <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                sx={{ marginRight: 5, ...(open && { display: "none" }) }}
-            >
-                <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap sx={{fontWeight: "bold"}}>
-                Dashboard
-            </Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-            <IconButton color="inherit" sx={{ ml: 2 }}>
-                <SettingsIcon />
-            </IconButton>
-            </Box>
-        </Toolbar>
+    <AppBar position="fixed" open={open} sx={{ backgroundColor: "black", color: "white" }}>
+    <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ marginRight: 5, ...(open && { display: "none" }) }}
+        >
+            <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" noWrap sx={{ fontWeight: "bold" }}>
+            Dashboard
+        </Typography>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <IconButton color="inherit" onClick={handleUserClick}>
+            <AccountCircleIcon />
+        </IconButton>
+        </Box>
+    </Toolbar>
     </AppBar>
+
+    {/* Drawer */}
     <Drawer
     variant="permanent"
     open={open}
@@ -156,7 +205,7 @@ return (
         color: "black",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between", 
+        justifyContent: "space-between",
         },
     }}
     >
@@ -211,20 +260,14 @@ return (
                 </ListItemButton>
             </ListItem>
             {item.children && (
-                <Collapse
-                in={openMenus[item.text] && open}
-                timeout="auto"
-                unmountOnExit
-                >
+                <Collapse in={openMenus[item.text] && open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     {item.children.map((sub) => (
                     <ListItemButton
                         key={sub.text}
                         sx={{
                         pl: 4,
-                        backgroundColor: isActive(sub.path)
-                            ? "#e0e0e0"
-                            : "inherit",
+                        backgroundColor: isActive(sub.path) ? "#e0e0e0" : "inherit",
                         }}
                         onClick={() => navigate(sub.path)}
                     >
@@ -248,29 +291,78 @@ return (
         </IconButton>
     </Box>
     </Drawer>
+
+    {/* Main Content */}
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Outlet />
+    <DrawerHeader />
+    <Outlet />
     </Box>
+
+    {/* Logout Dialog */}
     <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>Confirm Logout</DialogTitle>
-        <DialogContent>
-            <DialogContentText>
-            Are you sure you want to logout?
-            </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-            <Button onClick={handleCloseDialog} color="inherit">
-            Cancel
-            </Button>
-            <Button onClick={confirmLogout} color="error" autoFocus>
-            Logout
-            </Button>
-        </DialogActions>
+    <DialogTitle>Confirm Logout</DialogTitle>
+    <DialogContent>
+        <DialogContentText>Are you sure you want to logout?</DialogContentText>
+    </DialogContent>
+    <DialogActions>
+        <Button onClick={handleCloseDialog} color="inherit">
+        Cancel
+        </Button>
+        <Button onClick={confirmLogout} color="error" autoFocus>
+        Logout
+        </Button>
+    </DialogActions>
     </Dialog>
-    </Box>
+
+    {/* User Menu */}
+    <Menu anchorEl={anchorEl} open={openUserMenu} onClose={handleCloseUserMenu}>
+    <MenuItem onClick={handleOpenSubmenu}>
+        <ListItemText primary="Settings" />
+        <ListItemIcon sx={{ minWidth: 24 }}>
+        <ArrowRightIcon />
+        </ListItemIcon>
+    </MenuItem>
+
+    <MenuItem
+        onClick={() => {
+        handleCloseUserMenu();
+        handleLogoutClick();
+        }}
+    >
+        <LogoutIcon fontSize="small" style={{ marginRight: 8 }} />
+        Logout
+    </MenuItem>
+    </Menu>
+
+    {/* Submenu for Settings */}
+    <Menu
+    anchorEl={submenuAnchorEl}
+    open={openSubmenu}
+    onClose={handleCloseSubmenu}
+    anchorOrigin={{ vertical: "top", horizontal: "right" }}
+    transformOrigin={{ vertical: "top", horizontal: "left" }}
+    >
+    <MenuItem
+        onClick={() => {
+        handleCloseUserMenu();
+        navigate("/admin/profile");
+        }}
+    >
+        Profile
+    </MenuItem>
+    <MenuItem
+        onClick={() => {
+        handleCloseUserMenu();
+        navigate("/admin/account");
+        }}
+    >
+        Account
+    </MenuItem>
+    </Menu>
+</Box>
 );
 }
+
 const AdminLayout = () => {
     const { user } = React.useContext(AuthContext);
 

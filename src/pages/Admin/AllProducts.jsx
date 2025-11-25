@@ -8,22 +8,22 @@ import DownloadIcon from "@mui/icons-material/Download";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const sampleProducts = [
-    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "https://i.ibb.co/n7F4d5m/shoe.png", stock: false, sku: "31063", qty: "942" },
-    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "https://i.ibb.co/hg3R2Mp/tv.png", stock: false, sku: "5829", qty: "587" },
-    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "https://i.ibb.co/pRtLq1F/ipad.png", stock: true, sku: "35946", qty: "468" },
-    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "https://i.ibb.co/n7F4d5m/shoe.png", stock: false, sku: "31063-2", qty: "942" },
-    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "https://i.ibb.co/n7F4d5m/shoe.png", stock: false, sku: "31063-3", qty: "942" },
-    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "https://i.ibb.co/pRtLq1F/ipad.png", stock: true, sku: "35946-2", qty: "468" },
-    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "https://i.ibb.co/pRtLq1F/ipad.png", stock: true, sku: "35946-3", qty: "468" },
-    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "https://i.ibb.co/pRtLq1F/ipad.png", stock: true, sku: "35946-4", qty: "468" },
-    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "https://i.ibb.co/hg3R2Mp/tv.png", stock: false, sku: "5829-2", qty: "587" },
-    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "https://i.ibb.co/hg3R2Mp/tv.png", stock: false, sku: "5829-3", qty: "587" },
-    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "https://i.ibb.co/hg3R2Mp/tv.png", stock: false, sku: "5829-4", qty: "587" },
-    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "https://i.ibb.co/hg3R2Mp/tv.png", stock: false, sku: "5829-5", qty: "587" },
-    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "https://i.ibb.co/hg3R2Mp/tv.png", stock: false, sku: "5829-6", qty: "587" },
-    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "https://i.ibb.co/n7F4d5m/shoe.png", stock: false, sku: "31063-4", qty: "942" },
-    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "https://i.ibb.co/n7F4d5m/shoe.png", stock: false, sku: "31063-5", qty: "942" },
-    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "https://i.ibb.co/pRtLq1F/ipad.png", stock: true, sku: "35946-5", qty: "468" },
+    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "", stock: false, sku: "31063", qty: "942" },
+    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "", stock: false, sku: "5829", qty: "587" },
+    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "", stock: true, sku: "35946", qty: "468" },
+    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "", stock: false, sku: "31063-2", qty: "942" },
+    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "", stock: false, sku: "31063-3", qty: "942" },
+    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "", stock: true, sku: "35946-2", qty: "468" },
+    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "", stock: true, sku: "35946-3", qty: "468" },
+    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "", stock: true, sku: "35946-4", qty: "468" },
+    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "", stock: false, sku: "5829-2", qty: "587" },
+    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "", stock: false, sku: "5829-3", qty: "587" },
+    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "", stock: false, sku: "5829-4", qty: "587" },
+    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "", stock: false, sku: "5829-5", qty: "587" },
+    { name: "Amazon Fire TV", desc: "4K UHD smart TV, stream live TV without cable", img: "", stock: false, sku: "5829-6", qty: "587" },
+    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "", stock: false, sku: "31063-4", qty: "942" },
+    { name: "Air Jordan", desc: "Air Jordan is a line of basketball shoes produced by Nike", img: "", stock: false, sku: "31063-5", qty: "942" },
+    { name: "Apple iPad", desc: "10.2-inch Retina Display, 64GB", img: "", stock: true, sku: "35946-5", qty: "468" },
 ];
 
 const stats = [
@@ -45,8 +45,6 @@ export default function ProductDashboard() {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [selectedItems, setSelectedItems] = useState([]);
     
-    // An optional state to track the "active" or currently viewed product
-    // const [activeProduct, setActiveProduct] = useState(null); 
 
     const [newProduct, setNewProduct] = useState({
         name: "", desc: "", img: "", stock: false, sku: "", qty: ""

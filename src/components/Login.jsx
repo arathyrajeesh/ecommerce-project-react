@@ -9,6 +9,7 @@ const LoginPage = () => {
 const [userData, setUserData] = useState({ email: '', password: '' });
 const [loading, setLoading] = useState(false);
 const [showPassword, setShowPassword] = useState(false);
+const [rememberMe, setRememberMe] = useState(false);
 const navigate = useNavigate();
 
 const { login } = useContext(AuthContext); 
@@ -91,6 +92,17 @@ return (
             {showPassword ? 'Hide' : 'Show'}
             </button>
         </div>
+        </div>
+
+        <div className="login-group">
+        <label>
+            <input
+            type="checkbox"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+            />
+            Remember me
+        </label>
         </div>
 
         <button type="submit" className="login-button" disabled={loading}>

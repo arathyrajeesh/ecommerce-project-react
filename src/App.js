@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Spinner from "./components/Spinner";
-import ErrorBoundary from "./components/ErrorBoundary"; 
+import ErrorBoundary from "./components/ErrorBoundary";
 
 import ProtectedRoutes from "./hooks/useProtectedRoutes";
 import PublicLayout from "./layout/PublicLayout";
@@ -21,8 +21,7 @@ const Homepage = lazy(() => import("./pages/Homepage"));
 const Blog = lazy(() => import("./pages/Blog"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
-const Login = lazy(() => import("./components/Login"));
-const Register = lazy(() => import("./components/Register"));
+const Login = lazy(() => import("./components/SimpleLogin"));
 const ForgotPassword = lazy(() => import("./components/ForgetPassword"));
 const Cart = lazy(() => import("./components/Cart"));
 const ProductView = lazy(() => import("./components/ProductDetails"));
@@ -32,11 +31,10 @@ function App() {
     <ErrorBoundary>
       <Suspense fallback={<Spinner />}>
         <Routes>
-          <Route element={<PublicLayout />}>
-            <Route path="/" element={<Homepage />} />
-          </Route>
 
           <Route element={<ProtectedRoutes />}>
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<Homepage />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/products/:id" element={<ProductView />} />
             <Route path="/user" element={<UserProfile />} />
@@ -45,21 +43,15 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
           </Route>
+          </Route>
+
 
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
           </Route>
 
-          <Route
-            path="/admin/login"
-            element={
-              <ErrorBoundary>
-                <AdminLogin />
-              </ErrorBoundary>
-            }
-          />
+          <Route path="/admin/login" element={<AdminLogin />} />
 
           <Route
             element={<AdminLayout /> }
