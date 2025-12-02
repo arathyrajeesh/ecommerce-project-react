@@ -42,7 +42,6 @@ const handleSubmit = async (e) => {
         }
 
         toast.success('Login Successful');
-        navigate('/'); 
     } else {
         toast.error('Authentication failed. Please try again.');
     }

@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import AuthContext from '../context/AuthContext';
 import '../styles/Register.css';
 
 const SimpleRegister = () => {
   const [userData, setUserData] = useState({ name: '', email: '', password: '' });
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     const { value, name } = e.target;
@@ -19,16 +20,38 @@ const SimpleRegister = () => {
 
     // Simulate register
     setTimeout(() => {
-      const dummyUser = {
+      // Check if user already exists
+      const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      const userExists = existingUsers.find(user => user.email === userData.email);
+
+      if (userExists) {
+        toast.error('User already exists with this email');
+        setLoading(false);
+        return;
+      }
+
+      const newUser = {
         name: userData.name,
         email: userData.email,
+        password: userData.password, // In real app, this should be hashed
         role: 'user',
-        id: 'test123'
+        id: Date.now().toString()
       };
-      localStorage.setItem('loggedInUser', JSON.stringify(dummyUser));
-      localStorage.setItem('access_token', 'dummy_token');
+
+      // Store user
+      existingUsers.push(newUser);
+      localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
+
+      // Login the user
+      const userForLogin = {
+        name: newUser.name,
+        email: newUser.email,
+        role: newUser.role,
+        id: newUser.id
+      };
+
+      login(userForLogin);
       toast.success('Registration Successful');
-      navigate('/');
       setLoading(false);
     }, 1000);
   };
@@ -80,9 +103,6 @@ const SimpleRegister = () => {
 
         <p className="register-footer">
           Already have an account? <Link to="/login">Log in here!</Link>
-        </p>
-        <p className="register-footer">
-          <Link to="/">Go to Home Page</Link>
         </p>
       </form>
     </div>

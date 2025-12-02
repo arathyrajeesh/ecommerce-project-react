@@ -22,6 +22,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Login = lazy(() => import("./components/SimpleLogin"));
+const Register = lazy(() => import("./components/SimpleRegister"));
 const ForgotPassword = lazy(() => import("./components/ForgetPassword"));
 const Cart = lazy(() => import("./components/Cart"));
 const ProductView = lazy(() => import("./components/ProductDetails"));
@@ -48,6 +49,7 @@ function App() {
 
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
           </Route>
 

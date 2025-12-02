@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import AuthContext from '../context/AuthContext';
 import '../styles/Login.css';
 
 const SimpleLogin = () => {
   const [userData, setUserData] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     const { value, name } = e.target;
@@ -17,18 +18,23 @@ const SimpleLogin = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate login
+    // Simulate login with validation
     setTimeout(() => {
-      const dummyUser = {
-        name: 'Test User',
-        email: userData.email,
-        role: 'user',
-        id: 'test123'
-      };
-      localStorage.setItem('loggedInUser', JSON.stringify(dummyUser));
-      localStorage.setItem('access_token', 'dummy_token');
-      toast.success('Login Successful');
-      navigate('/');
+      const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      const user = registeredUsers.find(u => u.email === userData.email && u.password === userData.password);
+
+      if (user) {
+        const userForLogin = {
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          id: user.id
+        };
+        login(userForLogin);
+        toast.success('Login Successful');
+      } else {
+        toast.error('Invalid email or password. Please check your credentials or register first.');
+      }
       setLoading(false);
     }, 1000);
   };

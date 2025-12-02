@@ -37,13 +37,12 @@ const AdminLogin = () => {
 
         if (admin && email === admin.email && password === admin.password) {
             login(admin);
-            navigate("/admin/dashboard"); 
         } else {
             toast.error(" You are not authorized");
         }
 
         setLoading(false);
-        }, 1200); 
+        }, 1200);
     };
 
     return (
