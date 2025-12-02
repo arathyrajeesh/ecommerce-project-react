@@ -4,7 +4,6 @@ import { FaSearch, FaTimes } from "react-icons/fa";
 import { products } from '../data/ProductData';
 import ProductOverviewModal from './Overview';
 import { useNavigate } from 'react-router-dom';
-import { useDebounce } from 'use-debounce';
 
 const options = [
     { value: 'all', label: 'All' },
@@ -19,7 +18,16 @@ const ListingPage = ({ data }) => {
     const [sortType, setSortType] = useState('all');
     const [dataList, setDataList] = useState(products);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const debouncedQuery = useDebounce(query, 1000);
+    const [debouncedQuery, setDebouncedQuery] = useState('');
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedQuery(query);
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, [query]);
+
     useEffect(() => {
         let filtered = [...products];
 
