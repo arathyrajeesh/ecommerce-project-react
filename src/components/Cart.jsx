@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 import '../styles/Cart.css';
 
 const Cart = () => {
+    const { user, loading } = useContext(AuthContext);
     const [cartItems, setCartItems] = useState([]);
     const [showMessage, setShowMessage] = useState(false);
 
     const getCartKey = () => {
-        const userId = localStorage.getItem('user_id');
-        return userId ? `cart_${userId}` : null;
+        return user ? `cart_${user.id}` : null;
     };
 
     useEffect(() => {
@@ -54,6 +55,22 @@ const Cart = () => {
     const handleCheckout = () => {
         setShowMessage(true);
     };
+
+    if (loading) {
+        return <div className="loading-message">Loading...</div>;
+    }
+
+    if (!user) {
+        return (
+            <div className="cart-container">
+                <h2>Your Cart</h2>
+                <div className="empty-cart-message">
+                    <p>Please log in to view your cart.</p>
+                    <Link to="/login"><button className="continue-shopping">Log In</button></Link>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="cart-container">
